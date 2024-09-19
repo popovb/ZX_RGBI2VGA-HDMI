@@ -3,7 +3,8 @@
 #include "v_buf.h"
 #include "inttypes.h"
 #include "stdbool.h"
-#include "pico/platform.h"
+//#include "pico/platform.h"
+#include "pico.h"
 #define FW_VER "0.5A"
 
 #define BOARD_CODE_36LJU22

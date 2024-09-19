@@ -1,5 +1,5 @@
-#include <Arduino.h>
-#include <typeinfo>
+// #include <Arduino.h>
+// #include <typeinfo>
 
 
 extern "C"{
