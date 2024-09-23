@@ -10,60 +10,23 @@
 #define BOARD_CODE_36LJU22
 //#define BOARD_CODE_09LJV23
 
+///////////////////////////////////////////////////////////////////
 //конфигурация под конкретные платы
-#ifdef BOARD_CODE_36LJU22
-    #define HDMI_PIN_invert_diffpairs (0)
-    #define HDMI_PIN_RGB_notBGR (0)
+#ifdef   BOARD_CODE_36LJU22
 
+#define HDMI_PIN_invert_diffpairs (0)
+#define HDMI_PIN_RGB_notBGR (0)
+#define beginHDMI_PIN_data (8)
+#define beginHDMI_PIN_clk (14)
+#define beginVGA_PIN (8)
+#define F_CAP_PIN (6)
+#define D0_CAP_PIN (0)
+#define HS_PIN (D0_CAP_PIN + 4)
 
-    #define beginHDMI_PIN_data (8)
-
-    #define beginHDMI_PIN_clk (14)
-
-    #define beginVGA_PIN (8)
-
-
-  
-    
-    #define F_CAP_PIN (6)
- 
-    #define D0_CAP_PIN (0)
-    #define HS_PIN (D0_CAP_PIN+4)
-
-#else
-#ifdef BOARD_CODE_09LJV23
-    //начальный пин VGA
-    #define beginVGA_PIN (7)
-
-    //определение пинов и настроек HDMI
-    //09LJV23
-    #define HDMI_PIN_invert_diffpairs (0)
-    #define HDMI_PIN_RGB_notBGR (0)
-
-
-    #define beginHDMI_PIN_data (7)
-    #define beginHDMI_PIN_clk (13)
-#else
-    //по умолчанию
-     //начальный пин VGA
-    #define beginVGA_PIN (7)
-
-    //определение пинов и настроек HDMI
-    //09LJV23
-    #define HDMI_PIN_invert_diffpairs (0)
-    #define HDMI_PIN_RGB_notBGR (0)
-
-
-    #define beginHDMI_PIN_data (7)
-    #define beginHDMI_PIN_clk (13)
-    
 #endif
-#endif
+///////////////////////////////////////////////////////////////////
 
 extern uint8_t pallete8[];
-
-
-
 
 enum p_clk_mode_t{SELF_SYNC_MODE,EXT_SYNC_MODE,Z80_FREQ_MODE};
 enum video_out_mode_t{VGA,HDMI,RGB,COMP};
