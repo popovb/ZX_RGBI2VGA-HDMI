@@ -19,9 +19,6 @@
 #define beginHDMI_PIN_data (8)
 #define beginHDMI_PIN_clk (14)
 #define beginVGA_PIN (8)
-#define F_CAP_PIN (6)
-#define D0_CAP_PIN (0)
-#define HS_PIN (D0_CAP_PIN + 4)
 
 #endif
 ///////////////////////////////////////////////////////////////////
@@ -71,24 +68,9 @@ bool is_wide_mode;
 //номера SM для захвата
 #define SM_CAP  (0)
 
-
-//значения пинов захвата по умолчанию
-#ifndef D0_CAP_PIN
-#define D0_CAP_PIN (0)
-#endif
-
-#ifndef F_CAP_PIN
-#define F_CAP_PIN (D0_CAP_PIN+6)
-#endif
-
-#ifndef HS_PIN
-#define HS_PIN (D0_CAP_PIN+4)
-#endif
-
 #define V_BUF_W (320)
 #define V_BUF_H (320)
 #define V_BUF_SZ ((V_BUF_H+1)*V_BUF_W/2)
-
 
 extern uint8_t g_gbuf[];
 
