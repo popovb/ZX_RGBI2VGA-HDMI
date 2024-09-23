@@ -9,6 +9,7 @@
 
 namespace zxrgb {
 
-     using u8 = uint8_t;
+     using u8  = uint8_t;
+     using u16 = uint16_t;
 }
 #endif // _ZXRGB_TYPES_HPP_

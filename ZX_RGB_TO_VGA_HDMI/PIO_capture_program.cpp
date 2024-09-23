@@ -3,9 +3,13 @@
 
 #include "hardware/pio.h"
 #include "g_config.h"
+#include "CapturedPins.hpp"
+
+using namespace zxrgb;
+
+static u16 F_CAP_PIN = CapturedPins::f;
 
 //программа захвата с делением входной частоты
-
 uint16_t pio_program1_instructions[] = {
     
     0xa042, //  0: nop                               
