@@ -21,6 +21,13 @@
 #include "hardware/pio.h"
 #endif
 
+#include "CapturedPins.hpp"
+
+using namespace zxrgb;
+
+static u16 F_CAP_PIN = CapturedPins::f;
+
+
 //#define MIN(x,y) ((x)<(y)?(x):(y))
 //массив палитры
 uint8_t convertArr[256];
