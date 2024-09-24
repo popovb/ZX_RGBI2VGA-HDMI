@@ -32,62 +32,54 @@ static u16 F_CAP_PIN = CapturedPins::f;
 //массив палитры
 uint8_t convertArr[256];
 
-
-
-cap_set_t cap_set_MAX=
-{
-    .shX=200,
-    .shY=200,
-    .capture_delay=31,
-    .capture_delay_fall=31,
-    .capture_delay_rise=31,
-    .ext_freq_div=5,
-    .len_VS=500,
-    .int_freq=11000000,
-    .in_sync_mode=C_SYNC,
-    .p_clk_mode=Z80_FREQ_MODE,
-    .video_out_mode=COMP,
-    .inv_capture_pin_mask=0x7f,
-    .c_mode=SECAM
-
-};
-cap_set_t cap_set_MIN=
-{
-    .shX=0,
-    .shY=0,
-    .capture_delay=0,
-    .capture_delay_fall=0,
-    .capture_delay_rise=0,
-    .ext_freq_div=1,
-    .len_VS=50,
-    .int_freq=6000000,
-    .in_sync_mode=S_SYNC,
-    .p_clk_mode=SELF_SYNC_MODE,
-    .video_out_mode=VGA,
-    .inv_capture_pin_mask=0,
-    .c_mode=PAL
+cap_set_t cap_set_MAX = {
+    .shX = 200,
+    .shY = 200,
+    .p_clk_mode = Z80_FREQ_MODE,
+    .video_out_mode = COMP,
+    .in_sync_mode = C_SYNC,
+    .int_freq = 11000000,
+    .ext_freq_div = 5,
+    .capture_delay = 31,
+    .capture_delay_rise = 31,
+    .capture_delay_fall = 31,
+    .inv_capture_pin_mask = 0x7f,
+    .len_VS = 500,
+    .c_mode = SECAM
 
 };
 
+cap_set_t cap_set_MIN = {
+    .shX = 0,
+    .shY = 0,
+    .p_clk_mode = SELF_SYNC_MODE,
+    .video_out_mode = VGA,
+    .in_sync_mode = S_SYNC,
+    .int_freq = 6000000,
+    .ext_freq_div = 1,
+    .capture_delay = 0,
+    .capture_delay_rise = 0,
+    .capture_delay_fall = 0,
+    .inv_capture_pin_mask = 0,
+    .len_VS = 50,
+    .c_mode = PAL
+};
 
-cap_set_t cap_set=
-{
-    .shX=40,
-    .shY=40,
-    .capture_delay=0,
-    .capture_delay_fall=0,
-    .capture_delay_rise=0,
-    .ext_freq_div=2,
-    .len_VS=250,
-    .int_freq=6000000,
-    .in_sync_mode=S_SYNC,
-    .p_clk_mode=SELF_SYNC_MODE,
-    .video_out_mode=VGA,
-    .inv_capture_pin_mask=0,
-    .c_mode=PAL
-
-}
-;
+cap_set_t cap_set = {
+    .shX = 40,
+    .shY = 40,
+    .p_clk_mode = SELF_SYNC_MODE,
+    .video_out_mode = VGA,
+    .in_sync_mode = S_SYNC,
+    .int_freq = 6000000,
+    .ext_freq_div = 2,
+    .capture_delay = 0,
+    .capture_delay_rise = 0,
+    .capture_delay_fall = 0,
+    .inv_capture_pin_mask = 0,
+    .len_VS = 250,
+    .c_mode = PAL
+};
 
 void check_cap_data(cap_set_t *cap_data)
 {
