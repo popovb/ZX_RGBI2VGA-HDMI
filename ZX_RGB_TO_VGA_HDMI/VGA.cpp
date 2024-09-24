@@ -12,7 +12,9 @@
 #include "pico/stdlib.h"
 #include "stdlib.h"
 #include "v_buf.h"
+#include "Types.hpp"
 
+using namespace zxrgb;
 
 uint16_t pio_program_VGA_instructions[] = {
                        
@@ -68,7 +70,11 @@ void __not_in_flash_func(dma_handler_VGA)() {
     static uint32_t line_active=0;
     static uint8_t* vbuf=NULL;
     line_active++;
-    if (line_active==525) {line_active=0;frame_i++;vbuf=v_buf_get_out();}
+    if (line_active==525) {
+	 line_active = 0;
+	 frame_i++;
+	 vbuf = (u8*)v_buf_get_out();
+    }
     switch (line_active)
             {
                 case 480 ... 490:
@@ -195,7 +201,7 @@ void startVGA()
     
     
     // uint8_t* base_ptr=lines_data;
-    uint8_t* base_ptr=calloc(line_size*9/4,sizeof(uint32_t));;
+    uint8_t* base_ptr = (u8*)(calloc(line_size*9/4,sizeof(uint32_t)));
     lines_pattern[0]=(uint32_t*)base_ptr;
     //пустая строка
     memset(base_ptr,TMPL_NORM,line_size);
