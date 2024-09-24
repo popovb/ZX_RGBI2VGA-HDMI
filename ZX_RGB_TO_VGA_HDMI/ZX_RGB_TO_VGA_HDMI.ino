@@ -2,19 +2,16 @@
 // #include <typeinfo>
 
 
-extern "C"{
+#include "pico/stdlib.h"
+#include "hardware/vreg.h"
+#include "hardware/flash.h"
+#include "stdio.h"
 
-    #include "pico/stdlib.h"
-    #include "hardware/vreg.h"
-    #include "hardware/flash.h"
+#include "rgb_capture.h"
+#include "v_buf.h"
+#include "VGA.h"
+#include "HDMI.h"
 
-
-    #include "rgb_capture.h"
-    #include "stdio.h"
-    #include "v_buf.h"
-    #include "VGA.h"
-    #include "HDMI.h"
-}
 
 #define printf Serial.printf
 
