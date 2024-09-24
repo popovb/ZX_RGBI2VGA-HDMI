@@ -25,8 +25,9 @@
 
 using namespace zxrgb;
 
-static u16 F_CAP_PIN = CapturedPins::f;
-
+static u16 F_CAP_PIN  = CapturedPins::f;
+static u16 D0_CAP_PIN = CapturedPins::b;
+static u16 HS_PIN     = CapturedPins::s_syn;
 
 //#define MIN(x,y) ((x)<(y)?(x):(y))
 //массив палитры
@@ -175,9 +176,9 @@ void __not_in_flash_func(dma_handler_capture())
 
 
     
-    register uint8_t pix8=pix8_s;
-    register int x=x_s;
-    register int y=y_s;
+    uint8_t pix8 = pix8_s;
+    int x = x_s;
+    int y = y_s;
 
     static uint8_t* cap_buf8s=g_gbuf;
     uint8_t* cap_buf8=cap_buf8s;
@@ -217,7 +218,7 @@ void __not_in_flash_func(dma_handler_capture())
             if(y>=0)
                 {
                     if (i_frame>10)
-                    capture_buf=v_buf_get_in();
+			 capture_buf = (u8*)v_buf_get_in();
                     i_frame++;                
                     // inx_VS=0;
                 }
