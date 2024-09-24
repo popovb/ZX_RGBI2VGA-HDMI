@@ -12,6 +12,9 @@
 #include "HDMI.h"
 #include "hardware/vreg.h"
 #include "v_buf.h"
+#include "Types.hpp"
+
+using namespace zxrgb;
 
 static const uint16_t instructions_PIO_HDMI[] = {
     
@@ -140,7 +143,7 @@ static void __not_in_flash_func(dma_handler_HDMI)() {
     dma_hw->ints0 = 1u << dma_chan_ctrl;
     dma_channel_set_read_addr(dma_chan_ctrl,&DMA_BUF_ADDR[inx_buf_dma&1], false);
     y=(y==524)?0:(y+1);
-    if (y==0) screen_buf=v_buf_get_out();
+    if (y==0) screen_buf = (u8*)v_buf_get_out();
      if ((y&1)) return;
 
     inx_buf_dma++;
@@ -249,8 +252,8 @@ void startHDMI()
 
     }
 
-    DMA_BUF[0]=calloc(SIZE_DMA_BUF,sizeof(uint32_t));
-    DMA_BUF[1]=calloc(SIZE_DMA_BUF,sizeof(uint32_t));
+    DMA_BUF[0] = (u32*)(calloc(SIZE_DMA_BUF,sizeof(uint32_t)));
+    DMA_BUF[1] = (u32*)(calloc(SIZE_DMA_BUF,sizeof(uint32_t)));
 
 
     //инициализация PIO
