@@ -11,6 +11,17 @@ namespace zxrgb {
      class VideoBuffers {
 
      public:
+	  enum mode_t {
+	       X_1,
+	       X_3,
+	  };
+
+     public:
+	  VideoBuffers();
+
+	  void set_mode(mode_t);
+
+     private:
      };
      ///////////////////////////////////////////////
 
