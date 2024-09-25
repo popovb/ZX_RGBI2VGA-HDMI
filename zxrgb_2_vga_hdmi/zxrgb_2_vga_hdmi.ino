@@ -11,6 +11,7 @@
 #include "v_buf.h"
 #include "VGA.h"
 #include "HDMI.h"
+#include "VideoBuffers.hpp"
 
 
 #define printf Serial.printf
@@ -50,7 +51,10 @@ const int *flash_data_for_save = (const int *) (XIP_BASE + (PICO_FLASH_SIZE_BYTE
 bool is_start_core0=false;
 
 void setup() {
-  
+		 using namespace zxrgb;
+		 auto& vb = get_video_buffers();
+
+		 
     vreg_set_voltage(VREG_VOLTAGE_1_25);
     sleep_ms(100);
     set_sys_clock_khz(252000, true);
