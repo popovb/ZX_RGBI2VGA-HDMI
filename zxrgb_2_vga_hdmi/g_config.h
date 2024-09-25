@@ -33,26 +33,26 @@ enum c_mode_t{PAL,NTSC,SECAM};
 typedef struct cap_set_t cap_set_t;
 struct cap_set_t 
 {
-int16_t shX;
-int16_t shY;
-enum p_clk_mode_t p_clk_mode;
-enum video_out_mode_t video_out_mode;
-enum in_sync_mode_t in_sync_mode;
-bool is_3X_Buf;
-uint32_t int_freq;
-uint ext_freq_div;
-uint capture_delay;
-uint capture_delay_rise;
-uint capture_delay_fall;
-uint inv_capture_pin_mask;
-uint16_t len_VS;
+     int16_t shX;
+     int16_t shY;
+     enum p_clk_mode_t p_clk_mode;
+     enum video_out_mode_t video_out_mode;
+     enum in_sync_mode_t in_sync_mode;
+     bool is_3X_Buf;
+     uint32_t int_freq;
+     uint ext_freq_div;
+     uint capture_delay;
+     uint capture_delay_rise;
+     uint capture_delay_fall;
+     uint inv_capture_pin_mask;
+     uint16_t len_VS;
 
-enum c_mode_t c_mode;
-bool is_wide_mode;
+     enum c_mode_t c_mode;
+     bool is_wide_mode;
 
 
 }
-;
+     ;
 
 //определение PIO и SM для задачи VGA
 #define PIO_VGA (pio0)
@@ -73,13 +73,4 @@ bool is_wide_mode;
 
 extern uint8_t g_gbuf[];
 
-#define G_PRINTF  printf
 #define G_PRINTF_INFO  printf
-#define G_PRINTF_DEBUG  printf
-#define G_PRINTF_ERROR  printf
-
-
-
-
-
-
