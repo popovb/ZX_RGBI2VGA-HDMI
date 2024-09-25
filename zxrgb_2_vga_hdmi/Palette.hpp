@@ -16,6 +16,9 @@ namespace zxrgb {
 	  Palette();
 
 	  u8 operator[](u8) const;
+
+     private:
+	  u8 plt[16];
      };
      ///////////////////////////////////////////////
 
