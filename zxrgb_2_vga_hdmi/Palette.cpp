@@ -37,4 +37,9 @@ zxrgb::Palette::Palette():
      } {
      return;
 }
+
+zxrgb::u8 zxrgb::Palette::operator[](u8 v) const {
+     if (v >= N) v = N - 1;
+     return plt[v];
+}
 ///////////////////////////////////////////////////////////////////
