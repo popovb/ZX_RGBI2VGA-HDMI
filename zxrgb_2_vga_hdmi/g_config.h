@@ -67,10 +67,9 @@ struct cap_set_t
 //номера SM для захвата
 #define SM_CAP  (0)
 
-#define V_BUF_W (320)
-#define V_BUF_H (320)
-#define V_BUF_SZ ((V_BUF_H+1)*V_BUF_W/2)
-
-extern uint8_t g_gbuf[];
+/* #define V_BUF_W (320) */
+/* #define V_BUF_H (320) */
+/* #define V_BUF_SZ ((V_BUF_H+1)*V_BUF_W/2) */
+/* extern uint8_t g_gbuf[]; */
 
 #define G_PRINTF_INFO  printf

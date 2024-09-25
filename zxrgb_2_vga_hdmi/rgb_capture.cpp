@@ -22,6 +22,7 @@
 
 #include "CapturedPins.hpp"
 #include "VideoBuffers.hpp"
+#include "Buffer.hpp"
 
 using namespace zxrgb;
 
@@ -180,7 +181,8 @@ void __not_in_flash_func(dma_handler_capture())
      int x = x_s;
      int y = y_s;
 
-     static uint8_t* cap_buf8s=g_gbuf;
+     auto& bf =  get_buffer();
+     static uint8_t* cap_buf8s = bf.ptr();
      uint8_t* cap_buf8=cap_buf8s;
 
      static uint inx_VSs=0;
@@ -202,7 +204,9 @@ void __not_in_flash_func(dma_handler_capture())
 	       {
 		    y++;
 		    //обновляем указатель на следующею строку в буфере
-		    if ((y>=0)&&(capture_buf!=NULL)) cap_buf8=&(((uint8_t*)capture_buf)[y*V_BUF_W/2]);
+		    if ((y>=0)&&(capture_buf!=NULL))
+			 cap_buf8 =
+			      &(((uint8_t*)capture_buf)[y * bf.width() / 2]);
 	       }
 	       inx_VS++;
 	       x=-sh_x-1;
@@ -235,7 +239,8 @@ void __not_in_flash_func(dma_handler_capture())
 	  {                  
 	       if (capture_buf==NULL) continue;     
 	       if ((x<0)||(y<0)) continue;
-	       if ((x>=V_BUF_W)||(y>=(V_BUF_H))) { continue;};
+	       if ( (x >= bf.width()) ||
+		    (y >= bf.height()) ) { continue;};
                              
 	       uint8_t c_i=(pix8&0xf)|(val8<<4); 
 	       *cap_buf8++=convertArr[c_i];

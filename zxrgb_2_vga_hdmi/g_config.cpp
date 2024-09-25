@@ -3,4 +3,4 @@
 
 using namespace zxrgb;
 
-u8 g_gbuf[V_BUF_SZ*3];
+// u8 g_gbuf[V_BUF_SZ*3];

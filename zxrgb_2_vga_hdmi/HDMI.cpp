@@ -13,6 +13,7 @@
 #include "hardware/vreg.h"
 #include "Types.hpp"
 #include "VideoBuffers.hpp"
+#include "Buffer.hpp"
 
 using namespace zxrgb;
 
@@ -138,6 +139,7 @@ static uint tmds_encoder(uint8_t d8)
 }
 
 static void __not_in_flash_func(dma_handler_HDMI)() {
+     auto& bf = get_buffer();
      static uint32_t inx_buf_dma;  
      static uint y;
      dma_hw->ints0 = 1u << dma_chan_ctrl;
@@ -161,7 +163,7 @@ static void __not_in_flash_func(dma_handler_HDMI)() {
 	  //область изображения
      
 	  {
-	       uint8_t* scr_buf=&screen_buf[(y/2)*V_BUF_W/2];
+	       u8* scr_buf = &screen_buf[(y / 2) * bf.width() / 2];
 	       uint64_t* activ_buf_l=activ_buf;
 
 	       for(int i=scr_W/2;i--;)

@@ -14,6 +14,7 @@
 #include "Types.hpp"
 #include "VideoBuffers.hpp"
 #include "Palette.hpp"
+#include "Buffer.hpp"
 
 using namespace zxrgb;
 
@@ -66,6 +67,7 @@ void  __not_in_flash_func(memset32)(uint32_t* dst,const uint32_t data, uint32_t 
 static int dma_chan_ctrl;
 void __not_in_flash_func(dma_handler_VGA)() {
 
+     auto& bf = get_buffer();
      dma_hw->ints0 = 1u << dma_chan_ctrl;   
      static uint32_t frame_i=0;
      static uint32_t line_active=0;
@@ -107,7 +109,7 @@ void __not_in_flash_func(dma_handler_VGA)() {
      if (!(vbuf)) {dma_channel_set_read_addr(dma_chan_ctrl,&lines_pattern[2], false) ;return;}
      //зона прорисовки изображения
      int line=line_active/2;
-     uint8_t* vbuf8=vbuf+(line)*V_BUF_W/2; 
+     u8* vbuf8 = vbuf + (line) * bf.width() / 2; 
 
      uint32_t** ptr_vbuf_OUT=&lines_pattern[2];
      switch (line_active%4)
@@ -139,8 +141,7 @@ void __not_in_flash_func(dma_handler_VGA)() {
 	       *vbuf_OUT++=spec_colors[*vbuf8>>4];
 	  }
 
-     for(int i=V_BUF_W/2;i--;)
-     {
+     for (int i = bf.width() / 2; i--;) {
 	  *vbuf_OUT++=spec_colors[*vbuf8&0xf];
 	  *vbuf_OUT++=spec_colors[*vbuf8++>>4];
      }
