@@ -8,7 +8,6 @@
 #include "stdio.h"
 
 #include "rgb_capture.h"
-#include "v_buf.h"
 #include "VGA.h"
 #include "HDMI.h"
 #include "VideoBuffers.hpp"

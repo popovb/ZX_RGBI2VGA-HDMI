@@ -13,7 +13,6 @@
 #include "hardware/dma.h"
 #include "hardware/irq.h"
 
-#include "v_buf.h"
 #include "rgb_capture.h"
 #include "PIO_capture_program.h"
 
