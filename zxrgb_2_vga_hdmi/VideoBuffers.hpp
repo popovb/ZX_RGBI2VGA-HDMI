@@ -2,6 +2,8 @@
 // Copyright (c) 2024 Boris Popov <popov@whitekefir.ru>
 //
 
+#include "Types.hpp"
+
 #ifndef _ZXRGB_VIDEO_BUFFERS_HPP_
 #define _ZXRGB_VIDEO_BUFFERS_HPP_
 
@@ -20,6 +22,9 @@ namespace zxrgb {
 	  VideoBuffers();
 
 	  void set_mode(mode_t);
+
+	  u8* get_in() const;
+	  u8* get_out() const;
 
      private:
      };
