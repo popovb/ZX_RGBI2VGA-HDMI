@@ -27,6 +27,7 @@ namespace zxrgb {
 	  u8* get_out() const;
 
      private:
+	  mode_t mode;
      };
      ///////////////////////////////////////////////
 
