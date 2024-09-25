@@ -1,0 +1,16 @@
+//
+// Copyright (c) 2024 Boris Popov <popov@whitekefir.ru>
+//
+
+#include "Palette.hpp"
+
+///////////////////////////////////////////////////////////////////
+namespace zxrgb {
+
+     static Palette _plt;
+
+     const Palette& get_palette() {
+	  return _plt;
+     }
+}
+///////////////////////////////////////////////////////////////////
