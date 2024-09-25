@@ -18,12 +18,10 @@
 
 cap_set_t capture_setings;
 
-
-
-
-static void draw_hello_image()
-{
-		 uint8_t* vbuf=(uint8_t*)v_buf_get_out();
+static void draw_hello_image() {
+		 using namespace zxrgb;
+		 auto& vbs = get_video_buffers();
+		 uint8_t* vbuf = vbs.get_out();
 		 // uint8_t* vbuf1=vbuf+V_BUF_SZ;
 		 // uint8_t* vbuf2=vbuf1+V_BUF_SZ;
 
@@ -52,9 +50,8 @@ bool is_start_core0=false;
 
 void setup() {
 		 using namespace zxrgb;
-		 auto& vb = get_video_buffers();
+		 auto& vbs = get_video_buffers();
 
-		 
 		 vreg_set_voltage(VREG_VOLTAGE_1_25);
 		 sleep_ms(100);
 		 set_sys_clock_khz(252000, true);
@@ -136,9 +133,9 @@ void setup() {
 		 }   
 
 		 if (capture_setings.is_3X_Buf)
-					vb.set_mode(VideoBuffers::X_3);
+					vbs.set_mode(VideoBuffers::X_3);
 		 else
-					vb.set_mode(VideoBuffers::X_1);
+					vbs.set_mode(VideoBuffers::X_1);
 
 		 digitalWrite(LED_BUILTIN, LOW);  // сбрасываем индикаторный светодиод
 		 draw_hello_image(); 
