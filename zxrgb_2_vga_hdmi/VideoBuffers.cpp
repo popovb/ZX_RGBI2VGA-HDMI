@@ -21,4 +21,8 @@ zxrgb::VideoBuffers::VideoBuffers():
 {
      return;
 }
+
+void zxrgb::VideoBuffers::set_mode(mode_t v) {
+     mode = v;
+}
 ///////////////////////////////////////////////////////////////////
