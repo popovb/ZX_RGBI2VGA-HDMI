@@ -13,6 +13,7 @@
 #include "stdlib.h"
 #include "Types.hpp"
 #include "VideoBuffers.hpp"
+#include "Palette.hpp"
 
 using namespace zxrgb;
 
@@ -166,13 +167,13 @@ void setVGAWideMode(bool w_mode){is_wide=w_mode;};
 
 
 
-void startVGA()
-{
+void startVGA() {
+     const auto& plt = get_palette();
+     
      //инициализация палитры 
-     for(int i=0;i<16;i++)
-     {
-	  uint8_t c=pallete8[i]|0xc0;
-	  spec_colors[i]=(c<<0);
+     for (int i = 0; i < 16; i++) {
+	  uint8_t c = plt[i] | 0xc0;
+	  spec_colors[i] = (c<<0);
      }
 
      set_sys_clock_khz(252000, true);
