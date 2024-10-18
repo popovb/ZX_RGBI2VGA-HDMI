@@ -23,4 +23,8 @@ zxrgb::u16 zxrgb::Buffer::width() const {
 zxrgb::u16 zxrgb::Buffer::height() const {
      return h;
 }
+
+zxrgb::u8* zxrgb::Buffer::ptr() {
+     return buf;
+}
 ///////////////////////////////////////////////////////////////////

@@ -15,13 +15,13 @@ namespace zxrgb {
      public:
 	  u16 width() const;
 	  u16 height() const;
-	  u8* ptr() const;
+	  u8* ptr();
 
      private:
 	  static const u16 w      = 320;
 	  static const u16 h      = 320;
 	  static constexpr u32 sz = (h + 1) * w / 2;
-	  static u8 buf[sz];
+	  u8 buf[sz];
      };
      ///////////////////////////////////////////////
 
