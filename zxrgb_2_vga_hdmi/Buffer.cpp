@@ -19,4 +19,8 @@ namespace zxrgb {
 zxrgb::u16 zxrgb::Buffer::width() const {
      return w;
 }
+
+zxrgb::u16 zxrgb::Buffer::height() const {
+     return h;
+}
 ///////////////////////////////////////////////////////////////////
