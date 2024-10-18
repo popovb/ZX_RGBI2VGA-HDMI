@@ -69,26 +69,6 @@ zxrgb::u8* zxrgb::VideoBuffers::get_out() {
  * bool is_3x_bufmode=false;
  * bool is_first_image=true;
  *
-void* __not_in_flash_func(v_buf_get_out)() {
-   * if (!is_3x_bufmode|is_first_image) return v_bufs[0];
-   *  if(!is_show_vbuf[(inxVbufOut+1)%3]) 
-   *  {
-   *	  is_show_vbuf[inxVbufOut]=true;
-   *	  inxVbufOut=(inxVbufOut+1)%3;
-   *	  return v_bufs[inxVbufOut];
-   *  }
-
-     if(!is_show_vbuf[(inxVbufOut+2)%3]) 
-     {
-	  is_show_vbuf[inxVbufOut]=true;
-	  inxVbufOut=(inxVbufOut+2)%3;
-	  return v_bufs[inxVbufOut];
-     }
-
-     return v_bufs[inxVbufOut];
-
-};
-
 
 uint64_t inx_frame=0;
 uint64_t i_frame_vbuf[3]={0,0,0};
