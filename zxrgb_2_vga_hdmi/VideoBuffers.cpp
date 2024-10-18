@@ -18,7 +18,12 @@ namespace zxrgb {
 ///////////////////////////////////////////////////////////////////
 zxrgb::VideoBuffers::VideoBuffers():
      mode(X_1),
-     buffer(get_buffer())
+     buffer(get_buffer()),
+     bufs{
+	  buffer.buf,
+	  buffer.buf + buffer.sz,
+	  buffer.buf + (2 * buffer.sz),
+     }
 {
      return;
 }
@@ -28,9 +33,9 @@ void zxrgb::VideoBuffers::set_mode(mode_t v) {
 }
 ///////////////////////////////////////////////////////////////////
 /*
-#include "g_config.h"
-
-uint8_t* v_bufs[3]={g_gbuf,g_gbuf+V_BUF_SZ,g_gbuf+2*V_BUF_SZ};
+ * #include "g_config.h"
+ *
+ * uint8_t* v_bufs[3]={g_gbuf,g_gbuf+V_BUF_SZ,g_gbuf+2*V_BUF_SZ};
 
 bool is_show_vbuf[]={false,false,false};
 
