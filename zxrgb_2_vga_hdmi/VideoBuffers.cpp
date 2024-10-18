@@ -24,7 +24,9 @@ zxrgb::VideoBuffers::VideoBuffers():
 	  buffer.buf + buffer.sz,
 	  buffer.buf + (2 * buffer.sz),
      },
-     show{ false, false, false }
+     show{ false, false, false },
+     index_in(0),
+     index_out(0)
 {
      return;
 }
@@ -44,8 +46,8 @@ uint64_t inx_frame=0;
 
 uint64_t i_frame_vbuf[3]={0,0,0};
 
-int inxVbufIn=0;
-int inxVbufOut=0;
+ * int inxVbufIn=0;
+ * int inxVbufOut=0;
 bool is_3x_bufmode=false;
 bool is_first_image=true;
 

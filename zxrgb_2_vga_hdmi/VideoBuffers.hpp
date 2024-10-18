@@ -34,6 +34,8 @@ namespace zxrgb {
 	  Buffer& buffer;
 	  u8* bufs[3];
 	  bool show[3];
+	  u8 index_in;
+	  u8 index_out;
      };
      ///////////////////////////////////////////////
 
