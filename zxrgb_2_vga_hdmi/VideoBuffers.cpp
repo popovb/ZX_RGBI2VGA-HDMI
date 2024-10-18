@@ -23,7 +23,8 @@ zxrgb::VideoBuffers::VideoBuffers():
 	  buffer.buf,
 	  buffer.buf + buffer.sz,
 	  buffer.buf + (2 * buffer.sz),
-     }
+     },
+     show{ false, false, false }
 {
      return;
 }
@@ -36,9 +37,9 @@ void zxrgb::VideoBuffers::set_mode(mode_t v) {
  * #include "g_config.h"
  *
  * uint8_t* v_bufs[3]={g_gbuf,g_gbuf+V_BUF_SZ,g_gbuf+2*V_BUF_SZ};
-
-bool is_show_vbuf[]={false,false,false};
-
+ *
+ * bool is_show_vbuf[]={false,false,false};
+ *
 uint64_t inx_frame=0;
 
 uint64_t i_frame_vbuf[3]={0,0,0};

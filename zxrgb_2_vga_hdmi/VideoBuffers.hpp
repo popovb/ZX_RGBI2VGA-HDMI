@@ -33,6 +33,7 @@ namespace zxrgb {
      private:
 	  Buffer& buffer;
 	  u8* bufs[3];
+	  bool show[3];
      };
      ///////////////////////////////////////////////
 
