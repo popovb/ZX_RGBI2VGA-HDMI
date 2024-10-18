@@ -3,6 +3,7 @@
 //
 
 #include "Types.hpp"
+#include "Buffer.hpp"
 
 #ifndef _ZXRGB_VIDEO_BUFFERS_HPP_
 #define _ZXRGB_VIDEO_BUFFERS_HPP_
@@ -28,6 +29,9 @@ namespace zxrgb {
 
      private:
 	  mode_t mode;
+
+     private:
+	  Buffer& buffer;
      };
      ///////////////////////////////////////////////
 

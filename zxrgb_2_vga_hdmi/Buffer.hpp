@@ -12,6 +12,8 @@ namespace zxrgb {
      ///////////////////////////////////////////////
      class Buffer {
 
+	  friend class VideoBuffers;
+
      public:
 	  u16 width() const;
 	  u16 height() const;
@@ -21,7 +23,7 @@ namespace zxrgb {
 	  static const u16 w      = 320;
 	  static const u16 h      = 320;
 	  static constexpr u32 sz = (h + 1) * w / 2;
-	  u8 buf[sz];
+	  u8 buf[sz * 3];
      };
      ///////////////////////////////////////////////
 

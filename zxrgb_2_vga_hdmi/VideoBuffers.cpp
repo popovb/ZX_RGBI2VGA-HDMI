@@ -17,7 +17,8 @@ namespace zxrgb {
 
 ///////////////////////////////////////////////////////////////////
 zxrgb::VideoBuffers::VideoBuffers():
-     mode(X_1)
+     mode(X_1),
+     buffer(get_buffer())
 {
      return;
 }
