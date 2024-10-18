@@ -25,7 +25,7 @@ namespace zxrgb {
 	  void set_mode(mode_t);
 
 	  u8* get_in() const;
-	  u8* get_out() const;
+	  u8* get_out();
 
      private:
 	  mode_t mode;
