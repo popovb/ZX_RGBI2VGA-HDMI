@@ -36,6 +36,7 @@ namespace zxrgb {
 	  bool show[3];
 	  u8 index_in;
 	  u8 index_out;
+	  bool first;
      };
      ///////////////////////////////////////////////
 

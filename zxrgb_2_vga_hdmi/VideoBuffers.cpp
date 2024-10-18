@@ -26,7 +26,8 @@ zxrgb::VideoBuffers::VideoBuffers():
      },
      show{ false, false, false },
      index_in(0),
-     index_out(0)
+     index_out(0),
+     first(true)
 {
      return;
 }
@@ -49,7 +50,7 @@ uint64_t i_frame_vbuf[3]={0,0,0};
  * int inxVbufIn=0;
  * int inxVbufOut=0;
 bool is_3x_bufmode=false;
-bool is_first_image=true;
+ * bool is_first_image=true;
 
 void* __not_in_flash_func(v_buf_get_out)()
 {
