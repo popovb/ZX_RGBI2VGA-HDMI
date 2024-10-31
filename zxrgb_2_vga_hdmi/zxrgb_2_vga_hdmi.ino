@@ -8,6 +8,7 @@
 #include "HDMI.h"
 #include "VideoBuffers.hpp"
 #include "PicturesDrawer.hpp"
+#include "SettingsLoader.hpp"
 
 #define printf Serial.printf
 
@@ -40,103 +41,96 @@ void setup() {
  
 ///////////////////////////////////////////////////////////////////
      if (watchdog_caused_reboot()) {
-	  SettingsLoader sl;
+					SettingsLoader sl;
 
-	  char s_key[20];
-	  int s_data;
+					char s_key[20];
+					int s_data;
 
-	  bool is_save=false;
-	  //цикл с разбором команд
-	  while(1)
-	  {
-	       // sleep_ms(1);
+					bool is_save=false;
+					//цикл с разбором команд
+					while(1)
+					{
+							 // sleep_ms(1);
                 
 
-	       //int i= scanf("%19s",s_key);
-	       String s1=Serial.readStringUntil('\n');
-	       if (s1.length()==0) continue;
-	       sscanf(s1.c_str(),"%19s%d",s_key,&s_data);
+							 //int i= scanf("%19s",s_key);
+							 String s1=Serial.readStringUntil('\n');
+							 if (s1.length()==0) continue;
+							 sscanf(s1.c_str(),"%19s%d",s_key,&s_data);
 
 
-	       if (strcmp(s_key, "ping")==0) { printf("ping ok\n"); continue;};
-	       if (strcmp(s_key, "mode")==0) { printf("mode 0\n"); continue;};
+							 if (strcmp(s_key, "ping")==0) { printf("ping ok\n"); continue;};
+							 if (strcmp(s_key, "mode")==0) { printf("mode 0\n"); continue;};
 
-	       if (strcmp(s_key, "exit")==0) { printf("exit ok\n"); break;};
-	       if (strcmp(s_key, "save")==0) { is_save=true; printf("saving...\n"); break;};
+							 if (strcmp(s_key, "exit")==0) { printf("exit ok\n"); break;};
+							 if (strcmp(s_key, "save")==0) { is_save=true; printf("saving...\n"); break;};
                
 
-	       /*
+							 /*
 //обработчик загрузки параметров захвата
 #define CAP_SET_LOAD(x,T) {if(s_key[0]=='r' || s_key[0]=='w') {  if(s_key[0]=='w') (x)=static_cast<T>(s_data); check_cap_data(&capture_setings); printf("%s %d\n",s_key,(x)); continue;};};
 	       
-	       //смещение изображения
-	       if (strcmp(s_key+1, "cap_sh_x") == 0)        CAP_SET_LOAD(capture_setings.shX, int)
-	       if (strcmp(s_key+1, "cap_sh_y") == 0)        CAP_SET_LOAD(capture_setings.shY, int)
-	       if (strcmp(s_key+1, "cap_delay") == 0)       CAP_SET_LOAD(capture_setings.capture_delay, int)
-	       if (strcmp(s_key+1, "cap_delay_fall") == 0)  CAP_SET_LOAD(capture_setings.capture_delay_fall, int)
-	       if (strcmp(s_key+1, "cap_delay_rise") == 0)  CAP_SET_LOAD(capture_setings.capture_delay_rise, int)
-	       if (strcmp(s_key+1, "cap_ext_f_div") == 0)   CAP_SET_LOAD(capture_setings.ext_freq_div, int)
-	       if (strcmp(s_key+1, "cap_sync_mode") == 0)   CAP_SET_LOAD(capture_setings.in_sync_mode, in_sync_mode_t)
-	       if (strcmp(s_key+1, "cap_len_VS") == 0)      CAP_SET_LOAD(capture_setings.len_VS,int)
-	       if (strcmp(s_key+1, "cap_p_clk_mode") == 0)  CAP_SET_LOAD(capture_setings.p_clk_mode, p_clk_mode_t)
-	       if (strcmp(s_key+1, "video_out") == 0)       CAP_SET_LOAD(capture_setings.video_out_mode, video_out_mode_t)
-	       if (strcmp(s_key+1, "cap_int_f") == 0)       CAP_SET_LOAD(capture_setings.int_freq, int)
-   	       if (strcmp(s_key+1, "cap_in_inv_mask") == 0) CAP_SET_LOAD(capture_setings.inv_capture_pin_mask, int)
-               if (strcmp(s_key+1, "is_3X_bufmode") == 0)   CAP_SET_LOAD(capture_setings.is_3X_Buf, int)
-	       if (strcmp(s_key+1, "c_mode") == 0)          CAP_SET_LOAD(capture_setings.c_mode, c_mode_t)
-               if (strcmp(s_key+1, "wide_mode") == 0)       CAP_SET_LOAD(capture_setings.is_wide_mode, int)
+//смещение изображения
+if (strcmp(s_key+1, "cap_sh_x") == 0)        CAP_SET_LOAD(capture_setings.shX, int)
+if (strcmp(s_key+1, "cap_sh_y") == 0)        CAP_SET_LOAD(capture_setings.shY, int)
+if (strcmp(s_key+1, "cap_delay") == 0)       CAP_SET_LOAD(capture_setings.capture_delay, int)
+if (strcmp(s_key+1, "cap_delay_fall") == 0)  CAP_SET_LOAD(capture_setings.capture_delay_fall, int)
+if (strcmp(s_key+1, "cap_delay_rise") == 0)  CAP_SET_LOAD(capture_setings.capture_delay_rise, int)
+if (strcmp(s_key+1, "cap_ext_f_div") == 0)   CAP_SET_LOAD(capture_setings.ext_freq_div, int)
+if (strcmp(s_key+1, "cap_sync_mode") == 0)   CAP_SET_LOAD(capture_setings.in_sync_mode, in_sync_mode_t)
+if (strcmp(s_key+1, "cap_len_VS") == 0)      CAP_SET_LOAD(capture_setings.len_VS,int)
+if (strcmp(s_key+1, "cap_p_clk_mode") == 0)  CAP_SET_LOAD(capture_setings.p_clk_mode, p_clk_mode_t)
+if (strcmp(s_key+1, "video_out") == 0)       CAP_SET_LOAD(capture_setings.video_out_mode, video_out_mode_t)
+if (strcmp(s_key+1, "cap_int_f") == 0)       CAP_SET_LOAD(capture_setings.int_freq, int)
+if (strcmp(s_key+1, "cap_in_inv_mask") == 0) CAP_SET_LOAD(capture_setings.inv_capture_pin_mask, int)
+if (strcmp(s_key+1, "is_3X_bufmode") == 0)   CAP_SET_LOAD(capture_setings.is_3X_Buf, int)
+if (strcmp(s_key+1, "c_mode") == 0)          CAP_SET_LOAD(capture_setings.c_mode, c_mode_t)
+if (strcmp(s_key+1, "wide_mode") == 0)       CAP_SET_LOAD(capture_setings.is_wide_mode, int)
 
-		printf("wrong command\n");
+printf("wrong command\n");
 
-	  }
-	       */
-	       if (! sl.load(s_key+1)) printf("wrong command\n");
-
+}
+							 */
+							 if (! sl.load(s_key+1)) printf("wrong command\n");
+					}
 
 //сохранение параметров
-	  if (is_save)
-	  {
-	       check_cap_data(&capture_setings);
-	       uint32_t ints = save_and_disable_interrupts();
-	       flash_range_erase((PICO_FLASH_SIZE_BYTES - FLASH_SECTOR_SIZE), FLASH_SECTOR_SIZE);                           
-	       flash_range_program((PICO_FLASH_SIZE_BYTES - FLASH_SECTOR_SIZE), ( uint8_t*) &capture_setings, FLASH_PAGE_SIZE);
-	       restore_interrupts (ints);
+					if (is_save)
+					{
+							 check_cap_data(&capture_setings);
+							 uint32_t ints = save_and_disable_interrupts();
+							 flash_range_erase((PICO_FLASH_SIZE_BYTES - FLASH_SECTOR_SIZE), FLASH_SECTOR_SIZE);                           
+							 flash_range_program((PICO_FLASH_SIZE_BYTES - FLASH_SECTOR_SIZE), ( uint8_t*) &capture_setings, FLASH_PAGE_SIZE);
+							 restore_interrupts (ints);
 
-	       printf("saving data\n");
-	  };
+							 printf("saving data\n");
+					};
 
      }
 ///////////////////////////////////////////////////////////////////     
      
      if (capture_setings.is_3X_Buf)
-	  vbs.set_mode(VideoBuffers::X_3);
+					vbs.set_mode(VideoBuffers::X_3);
      else
-	  vbs.set_mode(VideoBuffers::X_1);
+					vbs.set_mode(VideoBuffers::X_1);
 
      digitalWrite(LED_BUILTIN, LOW);  // сбрасываем индикаторный светодиод
 
      //draw_hello_image();
      PicturesDrawer pd;
      pd.hello();
-		 
-
-
 
      if (capture_setings.video_out_mode==VGA) {startVGA();}//setVGAWideMode(capture_setings.is_wide_mode);
      if (capture_setings.video_out_mode==HDMI) { startHDMI();};
   
-
      is_start_core0=true;
-
 }
 
 // the loop function runs over and over again forever
-
 void loop() {
      char s_key[20];
      int s_data;
      sleep_ms(3);
-
 
      String s1=Serial.readStringUntil('\n');
      if (s1.length()==0) return;
@@ -145,28 +139,15 @@ void loop() {
      if (strcmp(s_key, "ping")==0) { printf("ping ok\n"); return;};
      if (strcmp(s_key, "reset")==0 || strcmp(s_key, "restart")==0 ) {printf("reset...\n");rp2040.restart();};
      if (strcmp(s_key, "mode")==0) { printf("mode 1\n"); return;};
-
-        
-
-        
      if (strcmp(s_key+1, "cap_sh_x")==0) {if(s_key[0]=='w') set_cap_shx(s_data); return;}
      if (strcmp(s_key+1, "cap_sh_y")==0) {if(s_key[0]=='w') set_cap_shy(s_data); return;}
-
-   
-
 }
 
-void setup1()
-{
-     while(!is_start_core0)   sleep_ms(3);
-
-
+void setup1() {
+     while(! is_start_core0) sleep_ms(3);
      startCapture(&capture_setings);
-
 }
-
 
 void loop1() {
      sleep_ms(1000);    
-   
 }
