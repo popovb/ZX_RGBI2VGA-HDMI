@@ -3,6 +3,7 @@
 //
 
 #include "VideoBuffers.hpp"
+#include <cstddef>
 
 ///////////////////////////////////////////////////////////////////
 namespace zxrgb {
@@ -27,7 +28,9 @@ zxrgb::VideoBuffers::VideoBuffers():
      show{ false, false, false },
      index_in(0),
      index_out(0),
-     first(true)
+     first(true),
+     index_frame(0),
+     frame_bufs{ 0, 0, 0 }
 {
      return;
 }
@@ -57,48 +60,30 @@ zxrgb::u8* zxrgb::VideoBuffers::get_out() {
 
      return bufs[index_out];
 }
-///////////////////////////////////////////////////////////////////
-/*
- * #include "g_config.h"
- * uint8_t* v_bufs[3]={g_gbuf,g_gbuf+V_BUF_SZ,g_gbuf+2*V_BUF_SZ};
- *
- * bool is_show_vbuf[]={false,false,false};
- *
- * int inxVbufIn=0;
- * int inxVbufOut=0;
- * bool is_3x_bufmode=false;
- * bool is_first_image=true;
- *
 
-uint64_t inx_frame=0;
-uint64_t i_frame_vbuf[3]={0,0,0};
+// __not_in_flash_func()
+zxrgb::u8* zxrgb::VideoBuffers::get_in() {
+     if (mode == X_1) return bufs[0];
 
-void* __not_in_flash_func(v_buf_get_in)()
-{
-     if (!is_3x_bufmode) return v_bufs[0];
-
-        
-
-     if (inxVbufIn>=0)
-     {
-	  inx_frame++;
-	  if ((inx_frame)>1) is_first_image=false;
-	  i_frame_vbuf[inxVbufIn]=inx_frame;
-	  is_show_vbuf[inxVbufIn]=false;
-     }
-        
-     if(is_show_vbuf[(inxVbufIn+1)%3]) 
-     {
-	  inxVbufIn=(inxVbufIn+1)%3;
-	  return v_bufs[inxVbufIn];
+     if (index_in >= 0) {
+	  ++index_frame;
+	  if (index_frame > 1) first = false;
+	  frame_bufs[index_in] = index_frame;
+	  show[index_in] = false;
      }
 
-     if(is_show_vbuf[(inxVbufIn+2)%3]) 
-     {
-	  inxVbufIn=(inxVbufIn+2)%3;
-	  return v_bufs[inxVbufIn];
+     u8 idx = (index_in + 1) % 3;
+     if (show[idx]) {
+	  index_in = idx;
+	  return bufs[index_in];
+     }
+
+     idx = (index_in + 2) % 3;
+     if (show[idx]) {
+	  index_in = idx;
+	  return bufs[index_in];
      }
 
      return NULL;
-};
-*/
+}
+///////////////////////////////////////////////////////////////////

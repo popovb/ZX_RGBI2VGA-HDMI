@@ -24,7 +24,7 @@ namespace zxrgb {
 
 	  void set_mode(mode_t);
 
-	  u8* get_in() const;
+	  u8* get_in();
 	  u8* get_out();
 
      private:
@@ -37,6 +37,8 @@ namespace zxrgb {
 	  u8 index_in;
 	  u8 index_out;
 	  bool first;
+	  u64 index_frame;
+	  u64 frame_bufs[3];
      };
      ///////////////////////////////////////////////
 
