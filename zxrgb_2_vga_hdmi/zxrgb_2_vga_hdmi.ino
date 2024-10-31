@@ -1,7 +1,3 @@
-// #include <Arduino.h>
-// #include <typeinfo>
-
-
 #include "pico/stdlib.h"
 #include "hardware/vreg.h"
 #include "hardware/flash.h"
@@ -11,7 +7,6 @@
 #include "VGA.h"
 #include "HDMI.h"
 #include "VideoBuffers.hpp"
-#include "Buffer.hpp"
 #include "PicturesDrawer.hpp"
 
 #define printf Serial.printf
