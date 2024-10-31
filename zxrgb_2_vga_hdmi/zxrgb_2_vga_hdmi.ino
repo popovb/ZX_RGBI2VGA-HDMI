@@ -9,6 +9,7 @@
 #include "VideoBuffers.hpp"
 #include "PicturesDrawer.hpp"
 #include "SettingsLoader.hpp"
+#include "CaptureSettingsChecker.hpp"
 
 #define printf Serial.printf
 
@@ -31,11 +32,14 @@ void setup() {
 
 //      //загружаем ранее сохранённые данные заxвата
      memcpy(&capture_setings,flash_data_for_save,sizeof(cap_set_t));
-   
-//    // memset(&capture_setings,0,sizeof(cap_set_t));//test
-//     //подправляем , если в ячйках мусор
-     check_cap_data(&capture_setings);
-     pinMode(LED_BUILTIN, OUTPUT);
+     // memset(&capture_setings,0,sizeof(cap_set_t));//test
+
+     // подправляем , если в ячйках мусор
+     // check_cap_data(&capture_setings);
+		 CaptureSettingsChecker csc;
+		 csc.check(capture_setings);
+
+		 pinMode(LED_BUILTIN, OUTPUT);
      digitalWrite(LED_BUILTIN, HIGH);  // если попадём в настройки после wdt_reboot, то индикатор это покажет
 
  
@@ -66,7 +70,8 @@ void setup() {
 //сохранение параметров
 					if (is_save)
 					{
-							 check_cap_data(&capture_setings);
+							 // check_cap_data(&capture_setings);
+							 csc.check(capture_setings);
 							 uint32_t ints = save_and_disable_interrupts();
 							 flash_range_erase((PICO_FLASH_SIZE_BYTES - FLASH_SECTOR_SIZE), FLASH_SECTOR_SIZE);                           
 							 flash_range_program((PICO_FLASH_SIZE_BYTES - FLASH_SECTOR_SIZE), ( uint8_t*) &capture_setings, FLASH_PAGE_SIZE);
