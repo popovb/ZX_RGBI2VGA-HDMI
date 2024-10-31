@@ -31,7 +31,9 @@ void setup() {
      Serial.begin(115200);
 
 //      //загружаем ранее сохранённые данные заxвата
-     memcpy(&capture_setings,flash_data_for_save,sizeof(cap_set_t));
+     memcpy(&capture_setings,
+						flash_data_for_save,
+						sizeof(zxrgb::CaptureSettings));
      // memset(&capture_setings,0,sizeof(cap_set_t));//test
 
      // подправляем , если в ячйках мусор

@@ -51,35 +51,35 @@ zxrgb::CaptureSettings cap_set_MAX = {
 };
 
 zxrgb::CaptureSettings cap_set_MIN = {
-     .shX = 0,
-     .shY = 0,
-     .p_clk_mode = SELF_SYNC_MODE,
-     .video_out_mode = VGA,
-     .in_sync_mode = S_SYNC,
+     .shift_x = 0,
+     .shift_y = 0,
+     .clk_mode = ClockMode::SelfSync,
+     .video_mode = VideoMode::Vga,
+     .sync_mode = SyncMode::S,
      .int_freq = 6000000,
      .ext_freq_div = 1,
-     .capture_delay = 0,
-     .capture_delay_rise = 0,
-     .capture_delay_fall = 0,
-     .inv_capture_pin_mask = 0,
-     .len_VS = 50,
-     .c_mode = PAL
+     .delay = 0,
+     .delay_rise = 0,
+     .delay_fall = 0,
+     .inv_pin_mask = 0,
+     .len_vs = 50,
+     .color_mode = ColorMode::Pal
 };
 
 zxrgb::CaptureSettings cap_set = {
-     .shX = 40,
-     .shY = 40,
-     .p_clk_mode = SELF_SYNC_MODE,
-     .video_out_mode = VGA,
-     .in_sync_mode = S_SYNC,
+     .shift_x = 40,
+     .shift_y = 40,
+     .clk_mode = ClockMode::SelfSync,
+     .video_mode = VideoMode::Vga,
+     .sync_mode = SyncMode::S,
      .int_freq = 6000000,
      .ext_freq_div = 2,
-     .capture_delay = 0,
-     .capture_delay_rise = 0,
-     .capture_delay_fall = 0,
-     .inv_capture_pin_mask = 0,
-     .len_VS = 250,
-     .c_mode = PAL
+     .delay = 0,
+     .delay_rise = 0,
+     .delay_fall = 0,
+     .inv_pin_mask = 0,
+     .len_vs = 250,
+     .color_mode = ColorMode::Pal
 };
 /*
 void check_cap_data(cap_set_t *cap_data)
@@ -126,7 +126,7 @@ void check_cap_data(cap_set_t *cap_data)
 };
 */
 void set_cap_data(zxrgb::CaptureSettings* cap_data) {
-     memcpy(&cap_set,cap_data,sizeof(cap_set_t));
+     memcpy(&cap_set, cap_data, sizeof(zxrgb::CaptureSettings));
      CaptureSettingsChecker csc;
      csc.check(*cap_data);
      // check_cap_data(&cap_set);
@@ -160,10 +160,10 @@ void __not_in_flash_func(dma_handler_capture())
      dma_hw->ints1 = 1u << dma_chan;
      dma_channel_set_read_addr(dma_chan,&DMA_BUF_ADDR_CAP[inx_buf_dma&1], false);
 
-     int sh_x=cap_set.shX;
-     int sh_y=cap_set.shY;
-     bool is_csync=cap_set.in_sync_mode;
-     int len_VS_pix=cap_set.len_VS;
+     int sh_x=cap_set.shift_x;
+     int sh_y=cap_set.shift_y;
+     bool is_csync=cap_set.sync_mode;
+     int len_VS_pix=cap_set.len_vs;
 
      uint8_t* buf8=(uint8_t*)DMA_BUF_CAP[inx_buf_dma&1];
      inx_buf_dma++;
@@ -261,23 +261,18 @@ void __not_in_flash_func(dma_handler_capture())
 
 }
 
-
-
-
-
-
-void set_cap_shx(int sh_x)
-{
-     cap_set.shX=sh_x>cap_set_MAX.shX?cap_set_MAX.shX:sh_x;
-     cap_set.shX=sh_x<cap_set_MIN.shX?cap_set_MIN.shX:sh_x;
-
+void set_cap_shx(int sh_x) {
+     cap_set.shift_x = (sh_x > cap_set_MAX.shift_x) ?
+	  cap_set_MAX.shift_x : sh_x;
+     cap_set.shift_x = (sh_x < cap_set_MIN.shift_x) ?
+	  cap_set_MIN.shift_x : sh_x;
 };
 
-void set_cap_shy(int sh_y)
-{
-     cap_set.shY=sh_y>cap_set_MAX.shY?cap_set_MAX.shY:sh_y;
-     cap_set.shY=sh_y<cap_set_MIN.shY?cap_set_MIN.shY:sh_y;
-
+void set_cap_shy(int sh_y) {
+     cap_set.shift_y = (sh_y > cap_set_MAX.shift_y) ?
+	  cap_set_MAX.shift_y : sh_y;
+     cap_set.shift_y = (sh_y < cap_set_MIN.shift_y) ?
+	  cap_set_MIN.shift_y : sh_y;
 };
 
 void startCapture(CaptureSettings* cap_data) {   
@@ -306,7 +301,7 @@ void startCapture(CaptureSettings* cap_data) {
      int sm=SM_CAP;
      uint pin=D0_CAP_PIN;
      //инверсия входных сигналов
-     int inv_mask=cap_set.inv_capture_pin_mask;
+     int inv_mask = cap_set.inv_pin_mask;
      for(int i=0;i<7;i++)
      {
 	  gpio_init(pin+i);
@@ -323,19 +318,20 @@ void startCapture(CaptureSettings* cap_data) {
      //     capture_program.instructions=capture_program_instructions_inv;
      uint offset;
      pio_sm_config c;
-     switch (cap_set.p_clk_mode)
-     {
-     case SELF_SYNC_MODE:
+     switch (cap_set.clk_mode) {
+
+     case ClockMode::SelfSync:
         
-	  pio_program0_instructions[0]|=((cap_set.capture_delay&0b11111)<<8);
+	  pio_program0_instructions[0]|=((cap_set.delay&0b11111)<<8);
 
 	  offset = pio_add_program(PIO_CAP, &pio_program0_CAP);
 	  c = pio_get_default_sm_config();          
 	  sm_config_set_wrap(&c, offset, offset + (pio_program0_CAP.length-1));
 
 	  break;
-     case EXT_SYNC_MODE:
-	  pio_program1_instructions[0]|=((cap_set.capture_delay&0b11111)<<8);
+
+     case ClockMode::ExtSync:
+	  pio_program1_instructions[0]|=((cap_set.delay&0b11111)<<8);
 	  pio_program1_instructions[1]|=((cap_set.ext_freq_div-1)&0b11111);
 	  pio_program1_instructions[8]|=((cap_set.ext_freq_div-1)&0b11111);
 
@@ -344,9 +340,10 @@ void startCapture(CaptureSettings* cap_data) {
 	  sm_config_set_wrap(&c, offset, offset + (pio_program1_CAP.length-1));
 
 	  break;
-     case Z80_FREQ_MODE:
-	  pio_program2_instructions[1]|=((cap_set.capture_delay_rise&0b11111)<<8);
-	  pio_program2_instructions[5]|=((cap_set.capture_delay_fall&0b11111)<<8);
+
+     case ClockMode::Z80Freq:
+	  pio_program2_instructions[1]|=((cap_set.delay_rise&0b11111)<<8);
+	  pio_program2_instructions[5]|=((cap_set.delay_fall&0b11111)<<8);
  
 
 	  offset = pio_add_program(PIO_CAP, &pio_program2_CAP);
@@ -378,8 +375,7 @@ void startCapture(CaptureSettings* cap_data) {
      pio_sm_init(PIO_CAP, sm, offset, &c);
      pio_sm_set_enabled(PIO_CAP, sm, true);
 
-     if (cap_set.p_clk_mode==SELF_SYNC_MODE)
-     {
+     if (cap_set.clk_mode == ClockMode::SelfSync) {
 	  float fdiv=((1.0*clock_get_hz(clk_sys)/(cap_set.int_freq*12.0)) * (1 << 16)+0.5);
 	  uint32_t div32=(uint32_t) (fdiv);
 	  PIO_CAP->sm[sm].clkdiv=div32&0xffffffff;
