@@ -82,7 +82,7 @@ cap_set_t cap_set = {
      .len_VS = 250,
      .c_mode = PAL
 };
-
+/*
 void check_cap_data(cap_set_t *cap_data)
 {
      cap_data->shX=cap_data->shX>cap_set_MAX.shX?cap_set_MAX.shX:cap_data->shX;
@@ -124,15 +124,15 @@ void check_cap_data(cap_set_t *cap_data)
 
      cap_data->inv_capture_pin_mask=cap_data->inv_capture_pin_mask>cap_set_MAX.inv_capture_pin_mask?cap_set_MAX.inv_capture_pin_mask:cap_data->inv_capture_pin_mask;
      cap_data->inv_capture_pin_mask=cap_data->inv_capture_pin_mask<cap_set_MIN.inv_capture_pin_mask?cap_set_MIN.inv_capture_pin_mask:cap_data->inv_capture_pin_mask;
-
-
 };
-
-void set_cap_data(cap_set_t *cap_data)
-{
+*/
+void set_cap_data(zxrgb::CaptureSettings* cap_data) {
      memcpy(&cap_set,cap_data,sizeof(cap_set_t));
-     check_cap_data(&cap_set);
+     CaptureSettingsChecker csc;
+     csc.check(*cap_data);
+     // check_cap_data(&cap_set);
 };
+
 #define TST_PIN (25)
 
 uint8_t* capture_buf;//=g_gbuf;
@@ -281,13 +281,12 @@ void set_cap_shy(int sh_y)
 
 };
 
-void startCapture(cap_set_t *cap_data)
-{   
+void startCapture(CaptureSettings* cap_data) {   
      //
 
      // memcpy(&cap_set,cap_data,sizeof(cap_set_t));
      set_cap_data(cap_data);
-     check_cap_data(&cap_set);
+     //check_cap_data(&cap_set);
 
      for(int i=0;i<256;i++)
      {

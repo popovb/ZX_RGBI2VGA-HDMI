@@ -83,7 +83,7 @@ void setup() {
      }
 ///////////////////////////////////////////////////////////////////     
      
-     if (capture_setings.is_3X_Buf)
+     if (capture_setings.x3_buff)
 					vbs.set_mode(VideoBuffers::X_3);
      else
 					vbs.set_mode(VideoBuffers::X_1);
@@ -94,8 +94,8 @@ void setup() {
      PicturesDrawer pd;
      pd.hello();
 
-     if (capture_setings.video_out_mode==VGA) {startVGA();}//setVGAWideMode(capture_setings.is_wide_mode);
-     if (capture_setings.video_out_mode==HDMI) { startHDMI();};
+     if (capture_setings.video_mode == VideoMode::Vga) {startVGA();}//setVGAWideMode(capture_setings.is_wide_mode);
+     if (capture_setings.video_mode == VideoMode::Hdmi) { startHDMI();};
   
      is_start_core0=true;
 }
