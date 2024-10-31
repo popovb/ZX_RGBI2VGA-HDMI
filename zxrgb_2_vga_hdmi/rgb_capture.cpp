@@ -34,24 +34,23 @@ static u16 HS_PIN     = CapturedPins::s_syn;
 //массив палитры
 uint8_t convertArr[256];
 
-cap_set_t cap_set_MAX = {
-     .shX = 200,
-     .shY = 200,
-     .p_clk_mode = Z80_FREQ_MODE,
-     .video_out_mode = COMP,
-     .in_sync_mode = C_SYNC,
+zxrgb::CaptureSettings cap_set_MAX = {
+     .shift_x = 200,
+     .shift_y = 200,
+     .clk_mode = ClockMode::Z80Freq,
+     .video_mode = VideoMode::Comp,
+     .sync_mode = SyncMode::C,
      .int_freq = 11000000,
      .ext_freq_div = 5,
-     .capture_delay = 31,
-     .capture_delay_rise = 31,
-     .capture_delay_fall = 31,
-     .inv_capture_pin_mask = 0x7f,
-     .len_VS = 500,
-     .c_mode = SECAM
-
+     .delay = 31,
+     .delay_rise = 31,
+     .delay_fall = 31,
+     .inv_pin_mask = 0x7f,
+     .len_vs = 500,
+     .color_mode = ColorMode::Secam
 };
 
-cap_set_t cap_set_MIN = {
+zxrgb::CaptureSettings cap_set_MIN = {
      .shX = 0,
      .shY = 0,
      .p_clk_mode = SELF_SYNC_MODE,
@@ -67,7 +66,7 @@ cap_set_t cap_set_MIN = {
      .c_mode = PAL
 };
 
-cap_set_t cap_set = {
+zxrgb::CaptureSettings cap_set = {
      .shX = 40,
      .shY = 40,
      .p_clk_mode = SELF_SYNC_MODE,
