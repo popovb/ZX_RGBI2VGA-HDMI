@@ -12,36 +12,11 @@
 #include "HDMI.h"
 #include "VideoBuffers.hpp"
 #include "Buffer.hpp"
-
+#include "PicturesDrawer.hpp"
 
 #define printf Serial.printf
 
 cap_set_t capture_setings;
-
-static void draw_hello_image() {
-		 using namespace zxrgb;
-		 auto& vbs = get_video_buffers();
-		 uint8_t* vbuf = vbs.get_out();
-		 // uint8_t* vbuf1=vbuf+V_BUF_SZ;
-		 // uint8_t* vbuf2=vbuf1+V_BUF_SZ;
-
-		 auto& bf = get_buffer();
-		 for (int y = 0; y < bf.height(); y++)
-					for (int x=0; x < bf.width() / 2; x++) {
-							 uint8_t i=(y/15)&0x0f;
-							 uint8_t c=((i&1)<<3)|(i>>1);
-							 c|=c<<4;
-
-							 //uint8_t c=img01[y*(V_BUF_W/2)+x];
-							 *vbuf++=c;
-							 // *vbuf1++=c;
-							 // *vbuf2++=c;
-					}
-    
-
-}
-
-
 
 // int data_for_save[FLASH_PAGE_SIZE/sizeof(int)]; 
 const int *flash_data_for_save = (const int *) (XIP_BASE + (PICO_FLASH_SIZE_BYTES - FLASH_SECTOR_SIZE));
@@ -138,7 +113,11 @@ void setup() {
 					vbs.set_mode(VideoBuffers::X_1);
 
 		 digitalWrite(LED_BUILTIN, LOW);  // сбрасываем индикаторный светодиод
-		 draw_hello_image(); 
+
+		 //draw_hello_image();
+		 PicturesDrawer pd;
+		 pd.hello();
+		 
 
 
 
