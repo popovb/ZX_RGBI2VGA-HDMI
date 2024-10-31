@@ -21,9 +21,6 @@
 
 #endif
 ///////////////////////////////////////////////////////////////////
-
-/* extern uint8_t pallete8[]; */
-
 enum p_clk_mode_t{SELF_SYNC_MODE,EXT_SYNC_MODE,Z80_FREQ_MODE};
 enum video_out_mode_t{VGA,HDMI,RGB,COMP};
 enum in_sync_mode_t{S_SYNC,C_SYNC};
@@ -66,10 +63,5 @@ struct cap_set_t
 #define PIO_CAP (pio1)
 //номера SM для захвата
 #define SM_CAP  (0)
-
-/* #define V_BUF_W (320) */
-/* #define V_BUF_H (320) */
-/* #define V_BUF_SZ ((V_BUF_H+1)*V_BUF_W/2) */
-/* extern uint8_t g_gbuf[]; */
 
 #define G_PRINTF_INFO  printf
