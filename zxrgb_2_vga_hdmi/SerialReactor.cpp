@@ -53,6 +53,24 @@ bool zxrgb::SerialReactor::handle_exit() const {
      return true;
 }
 
+bool zxrgb::SerialReactor::handle_mode() const {
+     if (! check("mode") ) return false;
+     switch (mode) {
+
+     case Mode0:
+	  Serial.printf("mode 0\n");
+	  break;
+
+     case Mode1:
+	  Serial.printf("mode 1\n");
+	  break;
+
+     default:
+	  break;
+     }
+     return true;
+}
+
 bool zxrgb::SerialReactor::handle_save() {
      if (! check("save") ) return false;
      Serial.printf("saving...\n");
