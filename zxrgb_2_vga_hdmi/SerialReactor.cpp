@@ -13,14 +13,11 @@ zxrgb::SerialReactor::SerialReactor(mode_t v):
      return;
 }
 
+bool zxrgb::SerialReactor::need_to_save() const {
+     return save;
+}
+
 /*
 	  void handle() const;
 
-	  bool need_to_save() const;
-
-     private:
-	  mode_t mode;
-	  char key[20];
-	  int value;
-	  bool save;
 */
