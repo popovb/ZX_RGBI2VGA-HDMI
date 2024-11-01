@@ -23,6 +23,12 @@ namespace zxrgb {
 	  void handle() const;
 
 	  bool need_to_save() const;
+
+     private:
+	  mode_t mode;
+	  char key[20];
+	  int value;
+	  bool save;
      };
 }
 #endif // _ZXRGB_SERIAL_REACTOR_HPP_
