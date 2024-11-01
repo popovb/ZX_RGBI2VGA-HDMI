@@ -20,13 +20,13 @@ namespace zxrgb {
 
      private:
 	  template<class T>
-	  void select_min_max(T&, T, T) const;
+	  void check_min_max(T&, T, T) const;
      };
 }
 
 ///////////////////////////////////////////////////////////////////
 template<class T> void zxrgb::CaptureSettingsChecker::
-select_min_max(T& value, T min, T max) const {
+check_min_max(T& value, T min, T max) const {
      value = (value < min) ? min : value;
      value = (value > max) ? max : value;
 }

@@ -42,18 +42,18 @@ zxrgb::CaptureSettingsChecker::max = {
 
 ///////////////////////////////////////////////////////////////////
 void zxrgb::CaptureSettingsChecker::check(CaptureSettings& cs) const {
-     select_min_max(cs.shift_x, min.shift_x, max.shift_x);
-     select_min_max(cs.shift_y, min.shift_y, max.shift_y);
-     select_min_max(cs.clk_mode, min.clk_mode, max.clk_mode);
-     select_min_max(cs.video_mode, min.video_mode, max.video_mode);
-     select_min_max(cs.sync_mode, min.sync_mode, max.sync_mode);
-     select_min_max(cs.int_freq, min.int_freq, max.int_freq);
-     select_min_max(cs.ext_freq_div, min.ext_freq_div, max.ext_freq_div);
-     select_min_max(cs.delay, min.delay, max.delay);
-     select_min_max(cs.delay_rise, min.delay_rise, max.delay_rise);
-     select_min_max(cs.delay_fall, min.delay_fall, max.delay_fall);
-     select_min_max(cs.inv_pin_mask, min.inv_pin_mask, max.inv_pin_mask);
-     select_min_max(cs.len_vs, min.len_vs, max.len_vs);
-     select_min_max(cs.color_mode, min.color_mode, max.color_mode);
+     check_min_max(cs.shift_x, min.shift_x, max.shift_x);
+     check_min_max(cs.shift_y, min.shift_y, max.shift_y);
+     check_min_max(cs.clk_mode, min.clk_mode, max.clk_mode);
+     check_min_max(cs.video_mode, min.video_mode, max.video_mode);
+     check_min_max(cs.sync_mode, min.sync_mode, max.sync_mode);
+     check_min_max(cs.int_freq, min.int_freq, max.int_freq);
+     check_min_max(cs.ext_freq_div, min.ext_freq_div, max.ext_freq_div);
+     check_min_max(cs.delay, min.delay, max.delay);
+     check_min_max(cs.delay_rise, min.delay_rise, max.delay_rise);
+     check_min_max(cs.delay_fall, min.delay_fall, max.delay_fall);
+     check_min_max(cs.inv_pin_mask, min.inv_pin_mask, max.inv_pin_mask);
+     check_min_max(cs.len_vs, min.len_vs, max.len_vs);
+     check_min_max(cs.color_mode, min.color_mode, max.color_mode);
 }
 ///////////////////////////////////////////////////////////////////
