@@ -35,10 +35,8 @@ void zxrgb::SerialReactor::handle0() {
 	  if (handle_mode()) continue;
 	  if (handle_exit()) break;
 	  if (handle_save()) break;
-	  
-	  //
-	  // TODO
-	  //
+
+	  sl.load(key, value);
      }
 }
 
