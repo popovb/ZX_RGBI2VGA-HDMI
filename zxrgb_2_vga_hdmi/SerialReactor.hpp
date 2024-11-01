@@ -3,6 +3,7 @@
 //
 
 #include "CaptureSettings.hpp"
+#include "SettingsLoader.hpp"
 
 #ifndef _ZXRGB_SERIAL_REACTOR_HPP_
 #define _ZXRGB_SERIAL_REACTOR_HPP_
@@ -30,6 +31,7 @@ namespace zxrgb {
 	  char key[20];
 	  int value;
 	  bool save;
+	  SettingsLoader sl;
 
      private:
 	  void handle0();
