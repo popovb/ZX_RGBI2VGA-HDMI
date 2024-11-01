@@ -78,6 +78,11 @@ bool zxrgb::SerialReactor::handle_save() {
      return true;
 }
 
+bool zxrgb::SerialReactor::check(const char* s) const {
+     if (strcmp(key, s) == 0) return true;
+     return false;
+}
+
 void zxrgb::SerialReactor::handle1() const {
      //
      // TODO
