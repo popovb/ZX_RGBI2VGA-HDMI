@@ -2,7 +2,7 @@
 // Copyright (c) 2024 Boris Popov <popov@whitekefir.ru>
 //
 
-// #include "Types.hpp"
+#include "CaptureSettings.hpp"
 
 #ifndef _ZXRGB_SERIAL_REACTOR_HPP_
 #define _ZXRGB_SERIAL_REACTOR_HPP_
@@ -18,7 +18,7 @@ namespace zxrgb {
 	  };
 
      public:
-	  SerialReactor(mode_t);
+	  SerialReactor(mode_t, CaptureSettings&);
 
 	  void handle() const;
 
@@ -26,6 +26,7 @@ namespace zxrgb {
 
      private:
 	  mode_t mode;
+	  CaptureSettings& cs;
 	  char key[20];
 	  int value;
 	  bool save;

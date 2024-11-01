@@ -48,7 +48,7 @@ void setup() {
  
 ///////////////////////////////////////////////////////////////////
      if (watchdog_caused_reboot()) {
-					SerialReactor sr(SerialReactor::Mode0);
+					SerialReactor sr(SerialReactor::Mode0, capture_setings);
 					sr.handle();
 
 					if (sr.need_to_save()) {

@@ -4,8 +4,9 @@
 
 #include "SerialReactor.hpp"
 
-zxrgb::SerialReactor::SerialReactor(mode_t v):
+zxrgb::SerialReactor::SerialReactor(mode_t v, CaptureSettings& vv):
      mode(v),
+     cs(vv),
      key{ '\0', },
      value(0),
      save(false)
