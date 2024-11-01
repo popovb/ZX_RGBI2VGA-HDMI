@@ -3,6 +3,7 @@
 //
 
 #include "SerialReactor.hpp"
+#include <Arduino.h>
 
 zxrgb::SerialReactor::SerialReactor(mode_t v, CaptureSettings& vv):
      mode(v),
@@ -18,7 +19,25 @@ bool zxrgb::SerialReactor::need_to_save() const {
      return save;
 }
 
-/*
-	  void handle() const;
+void zxrgb::SerialReactor::handle() const {
+     if (mode == Mode0) return handle0();
+     handle1();
+}
 
-*/
+void zxrgb::SerialReactor::handle0() const {
+     while (true) {
+	  String s = Serial.readStringUntil('\n');
+	  if (s.length() == 0) continue;
+	  sscanf(s.c_str(), "%19s%d" , key, &value);
+	  
+	  //
+	  // TODO
+	  //
+     }
+}
+
+void zxrgb::SerialReactor::handle1() const {
+     //
+     // TODO
+     //
+}
