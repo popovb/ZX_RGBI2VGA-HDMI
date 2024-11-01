@@ -8,8 +8,9 @@
 #include "HDMI.h"
 #include "VideoBuffers.hpp"
 #include "PicturesDrawer.hpp"
-#include "SettingsLoader.hpp"
+//#include "SettingsLoader.hpp"
 #include "CaptureSettingsChecker.hpp"
+#include "SerialReactor.hpp"
 
 #define printf Serial.printf
 
@@ -47,6 +48,16 @@ void setup() {
  
 ///////////////////////////////////////////////////////////////////
      if (watchdog_caused_reboot()) {
+					SerialReactor sr(SerialReactor::Mode0);
+					sr.handle();
+
+					if (sr.need_to_save()) {
+							 //
+							 // TODO
+							 //
+					}
+		 }
+			 /*
 					SettingsLoader sl;
 
 					char s_key[20];
@@ -54,7 +65,7 @@ void setup() {
 
 					bool is_save=false;
 					//цикл с разбором команд
-					while (1) {
+					while (true) {
 							 String s1=Serial.readStringUntil('\n');
 							 if (s1.length()==0) continue;
 							 sscanf(s1.c_str(),"%19s%d",s_key,&s_data);
@@ -81,8 +92,10 @@ void setup() {
 
 							 printf("saving data\n");
 					};
+			 
 
-     }
+     }*/
+		 
 ///////////////////////////////////////////////////////////////////     
      
      if (capture_setings.x3_buff)
