@@ -43,6 +43,10 @@ bool zxrgb::SettingsLoader::check(char v) const {
      return false;
 }
 
+bool zxrgb::SettingsLoader::check(const char* a, const char* b) const {
+     if (strcmp(a, b) == 0) return true;
+     return false;
+}
 /*
 void CAP_SET_LOAD(x, T) {
      if(s_key[0]=='r' || s_key[0]=='w') {
