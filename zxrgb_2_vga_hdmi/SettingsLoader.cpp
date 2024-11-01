@@ -3,6 +3,12 @@
 //
 
 #include "SettingsLoader.hpp"
+
+zxrgb::SettingsLoader::SettingsLoader(CaptureSettings& v):
+     cs(v)
+{
+     return;
+}
 /*
 bool zxrgb::SettingsLoader::load(CaptureSettings& cs, char* s) const {
      //if (

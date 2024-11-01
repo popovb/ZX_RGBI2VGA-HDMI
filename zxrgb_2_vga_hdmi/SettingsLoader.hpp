@@ -15,6 +15,9 @@ namespace zxrgb {
 	  SettingsLoader(CaptureSettings&);
 
 	  void load(const char*, int) const;
+
+     private:
+	  CaptureSettings& cs;
      };
 }
 #endif // _ZXRGB_SETTINGS_LOADER_HPP_
