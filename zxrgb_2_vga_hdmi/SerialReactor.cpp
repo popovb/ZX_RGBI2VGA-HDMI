@@ -47,6 +47,12 @@ bool zxrgb::SerialReactor::handle_ping() const {
      return true;
 }
 
+bool zxrgb::SerialReactor::handle_exit() const {
+     if (! check("exit") ) return false;
+     Serial.printf("exit ok\n");
+     return true;
+}
+
 void zxrgb::SerialReactor::handle1() const {
      //
      // TODO
