@@ -29,6 +29,11 @@ void zxrgb::SerialReactor::handle0() const {
 	  String s = Serial.readStringUntil('\n');
 	  if (s.length() == 0) continue;
 	  sscanf(s.c_str(), "%19s%d" , key, &value);
+
+	  if (handle_ping()) continue;
+	  if (handle_mode()) continue;
+	  if (handle_exit()) break;
+	  if (handle_save()) break;
 	  
 	  //
 	  // TODO

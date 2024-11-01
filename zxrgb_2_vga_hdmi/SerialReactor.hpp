@@ -34,6 +34,10 @@ namespace zxrgb {
      private:
 	  void handle0() const;
 	  void handle1() const;
+	  bool handle_ping() const;
+	  bool handle_mode() const;
+	  bool handle_exit() const;
+	  bool handle_save() const;
      };
 }
 #endif // _ZXRGB_SERIAL_REACTOR_HPP_
