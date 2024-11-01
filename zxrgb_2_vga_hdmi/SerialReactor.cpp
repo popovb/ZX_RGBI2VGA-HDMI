@@ -19,12 +19,12 @@ bool zxrgb::SerialReactor::need_to_save() const {
      return save;
 }
 
-void zxrgb::SerialReactor::handle() const {
+void zxrgb::SerialReactor::handle() {
      if (mode == Mode0) return handle0();
      handle1();
 }
 
-void zxrgb::SerialReactor::handle0() const {
+void zxrgb::SerialReactor::handle0() {
      while (true) {
 	  String s = Serial.readStringUntil('\n');
 	  if (s.length() == 0) continue;
@@ -50,6 +50,13 @@ bool zxrgb::SerialReactor::handle_ping() const {
 bool zxrgb::SerialReactor::handle_exit() const {
      if (! check("exit") ) return false;
      Serial.printf("exit ok\n");
+     return true;
+}
+
+bool zxrgb::SerialReactor::handle_save() {
+     if (! check("save") ) return false;
+     Serial.printf("saving...\n");
+     save = true;
      return true;
 }
 

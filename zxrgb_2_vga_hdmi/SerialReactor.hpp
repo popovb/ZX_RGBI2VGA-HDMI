@@ -20,7 +20,7 @@ namespace zxrgb {
      public:
 	  SerialReactor(mode_t, CaptureSettings&);
 
-	  void handle() const;
+	  void handle();
 
 	  bool need_to_save() const;
 
@@ -32,12 +32,12 @@ namespace zxrgb {
 	  bool save;
 
      private:
-	  void handle0() const;
+	  void handle0();
 	  void handle1() const;
 	  bool handle_ping() const;
 	  bool handle_mode() const;
 	  bool handle_exit() const;
-	  bool handle_save() const;
+	  bool handle_save();
 	  bool check(const char*) const;
      };
 }
