@@ -37,6 +37,12 @@ bool zxrgb::SettingsLoader::shift_x(const char* s, int v) const {
      return true;
 }
 
+bool zxrgb::SettingsLoader::check(char v) const {
+     if (v == 'w') return true;
+     if (v == 'r') return true;
+     return false;
+}
+
 /*
 void CAP_SET_LOAD(x, T) {
      if(s_key[0]=='r' || s_key[0]=='w') {
