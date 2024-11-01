@@ -81,50 +81,7 @@ zxrgb::CaptureSettings cap_set = {
      .len_vs = 250,
      .color_mode = ColorMode::Pal
 };
-/*
-void check_cap_data(cap_set_t *cap_data)
-{
-     cap_data->shX=cap_data->shX>cap_set_MAX.shX?cap_set_MAX.shX:cap_data->shX;
-     cap_data->shX=cap_data->shX<cap_set_MIN.shX?cap_set_MIN.shX:cap_data->shX;
 
-     cap_data->c_mode=cap_data->c_mode>cap_set_MAX.c_mode?cap_set_MAX.c_mode:cap_data->c_mode;
-     cap_data->c_mode=cap_data->c_mode<cap_set_MIN.c_mode?cap_set_MIN.c_mode:cap_data->c_mode;
-
-
-     cap_data->shY=cap_data->shY>cap_set_MAX.shY?cap_set_MAX.shY:cap_data->shY;
-     cap_data->shY=cap_data->shY<cap_set_MIN.shY?cap_set_MIN.shY:cap_data->shY;
-
-     cap_data->capture_delay=cap_data->capture_delay>cap_set_MAX.capture_delay?cap_set_MAX.capture_delay:cap_data->capture_delay;
-     cap_data->capture_delay=cap_data->capture_delay<cap_set_MIN.capture_delay?cap_set_MIN.capture_delay:cap_data->capture_delay;
-
-     cap_data->capture_delay_fall=cap_data->capture_delay_fall>cap_set_MAX.capture_delay_fall?cap_set_MAX.capture_delay_fall:cap_data->capture_delay_fall;
-     cap_data->capture_delay_fall=cap_data->capture_delay_fall<cap_set_MIN.capture_delay_fall?cap_set_MIN.capture_delay_fall:cap_data->capture_delay_fall;
-   
-     cap_data->capture_delay_rise=cap_data->capture_delay_rise>cap_set_MAX.capture_delay_rise?cap_set_MAX.capture_delay_rise:cap_data->capture_delay_rise;
-     cap_data->capture_delay_rise=cap_data->capture_delay_rise<cap_set_MIN.capture_delay_rise?cap_set_MIN.capture_delay_rise:cap_data->capture_delay_rise;
-
-     cap_data->ext_freq_div=cap_data->ext_freq_div>cap_set_MAX.ext_freq_div?cap_set_MAX.ext_freq_div:cap_data->ext_freq_div;
-     cap_data->ext_freq_div=cap_data->ext_freq_div<cap_set_MIN.ext_freq_div?cap_set_MIN.ext_freq_div:cap_data->ext_freq_div;
-
-     cap_data->len_VS=cap_data->len_VS>cap_set_MAX.len_VS?cap_set_MAX.len_VS:cap_data->len_VS;
-     cap_data->len_VS=cap_data->len_VS<cap_set_MIN.len_VS?cap_set_MIN.len_VS:cap_data->len_VS;
-
-     cap_data->int_freq=cap_data->int_freq>cap_set_MAX.int_freq?cap_set_MAX.int_freq:cap_data->int_freq;
-     cap_data->int_freq=cap_data->int_freq<cap_set_MIN.int_freq?cap_set_MIN.int_freq:cap_data->int_freq;    
-
-     cap_data->in_sync_mode=cap_data->in_sync_mode>cap_set_MAX.in_sync_mode?cap_set_MAX.in_sync_mode:cap_data->in_sync_mode;
-     cap_data->in_sync_mode=cap_data->in_sync_mode<cap_set_MIN.in_sync_mode?cap_set_MIN.in_sync_mode:cap_data->in_sync_mode;    
- 
-     cap_data->p_clk_mode=cap_data->p_clk_mode>cap_set_MAX.p_clk_mode?cap_set_MAX.p_clk_mode:cap_data->p_clk_mode;
-     cap_data->p_clk_mode=cap_data->p_clk_mode<cap_set_MIN.p_clk_mode?cap_set_MIN.p_clk_mode:cap_data->p_clk_mode;   
-
-     cap_data->video_out_mode=cap_data->video_out_mode>cap_set_MAX.video_out_mode?cap_set_MAX.video_out_mode:cap_data->video_out_mode;
-     cap_data->video_out_mode=cap_data->video_out_mode<cap_set_MIN.video_out_mode?cap_set_MIN.video_out_mode:cap_data->video_out_mode;    
-
-     cap_data->inv_capture_pin_mask=cap_data->inv_capture_pin_mask>cap_set_MAX.inv_capture_pin_mask?cap_set_MAX.inv_capture_pin_mask:cap_data->inv_capture_pin_mask;
-     cap_data->inv_capture_pin_mask=cap_data->inv_capture_pin_mask<cap_set_MIN.inv_capture_pin_mask?cap_set_MIN.inv_capture_pin_mask:cap_data->inv_capture_pin_mask;
-};
-*/
 void set_cap_data(zxrgb::CaptureSettings* cap_data) {
      memcpy(&cap_set, cap_data, sizeof(zxrgb::CaptureSettings));
      CaptureSettingsChecker csc;
