@@ -35,6 +35,12 @@ namespace zxrgb {
 	  bool len_vs(const char*, int) const;
 	  bool color_mode(const char*, int) const;
 	  bool wide(const char*, int) const;
+	  bool check(const char*, const char*) const;
+	  bool check(char) const;
+
+     private:
+	  template<class T>
+	  void set(T&, const char*, int) const;
      };
 }
 #endif // _ZXRGB_SETTINGS_LOADER_HPP_
