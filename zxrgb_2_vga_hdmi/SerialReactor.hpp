@@ -38,6 +38,7 @@ namespace zxrgb {
 	  bool handle_mode() const;
 	  bool handle_exit() const;
 	  bool handle_save() const;
+	  bool check(const char*) const;
      };
 }
 #endif // _ZXRGB_SERIAL_REACTOR_HPP_

@@ -41,6 +41,12 @@ void zxrgb::SerialReactor::handle0() const {
      }
 }
 
+bool zxrgb::SerialReactor::handle_ping() const {
+     if (! check("ping") ) return false;
+     Serial.printf("ping ok\n");
+     return true;
+}
+
 void zxrgb::SerialReactor::handle1() const {
      //
      // TODO
