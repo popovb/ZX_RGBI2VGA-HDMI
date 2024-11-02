@@ -36,6 +36,13 @@ bool zxrgb::SettingsLoader::shift_x(const char* s, int v) const {
      return true;
 }
 
+bool zxrgb::SettingsLoader::shift_y(const char* s, int v) const {
+     if (! check(s + 1, "cap_sh_y") ) return false;
+     if (! check(s[0]) ) return false;
+     set(cs.shift_y, s, v);
+     return true;
+}
+
 bool zxrgb::SettingsLoader::check(char v) const {
      if (v == 'w') return true;
      if (v == 'r') return true;
@@ -47,18 +54,6 @@ bool zxrgb::SettingsLoader::check(const char* a, const char* b) const {
      return false;
 }
 /*
-void CAP_SET_LOAD(x, T) {
-     if(s_key[0]=='r' || s_key[0]=='w') {
-	  if(s_key[0]=='w') (x)=static_cast<T>(s_data);
-	  check_cap_data(&capture_setings);
-	  printf("%s %d\n",s_key,(x));
-	  continue;
-     }
-}
-*/
-/*
-  if (strcmp(s_key+1, "cap_sh_x")==0) CAP_SET_LOAD(capture_setings.shX,int)
-  if (strcmp(s_key+1, "cap_sh_y")==0) CAP_SET_LOAD(capture_setings.shY,int)
   if (strcmp(s_key+1, "cap_delay")==0) CAP_SET_LOAD(capture_setings.capture_delay,int)
   if (strcmp(s_key+1, "cap_delay_fall")==0) CAP_SET_LOAD(capture_setings.capture_delay_fall,int)
   if (strcmp(s_key+1, "cap_delay_rise")==0) CAP_SET_LOAD(capture_setings.capture_delay_rise,int)
