@@ -85,6 +85,13 @@ bool zxrgb::SettingsLoader::ext_freq_div(const char* s, int v) const {
      return true;
 }
 
+bool zxrgb::SettingsLoader::delay(const char* s, int v) const {
+     if (! check(s + 1, "cap_delay") ) return false;
+     if (! check(s[0]) ) return false;
+     set(cs.delay, s, v);
+     return true;
+}
+
 bool zxrgb::SettingsLoader::check(char v) const {
      if (v == 'w') return true;
      if (v == 'r') return true;
@@ -96,7 +103,6 @@ bool zxrgb::SettingsLoader::check(const char* a, const char* b) const {
      return false;
 }
 /*
-  if (strcmp(s_key+1, "cap_delay")==0) CAP_SET_LOAD(capture_setings.capture_delay,int)
   if (strcmp(s_key+1, "cap_delay_fall")==0) CAP_SET_LOAD(capture_setings.capture_delay_fall,int)
   if (strcmp(s_key+1, "cap_delay_rise")==0) CAP_SET_LOAD(capture_setings.capture_delay_rise,int)
   if (strcmp(s_key+1, "cap_len_VS")==0) CAP_SET_LOAD(capture_setings.len_VS,int)
