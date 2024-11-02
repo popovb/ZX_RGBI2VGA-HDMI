@@ -12,6 +12,8 @@ namespace zxrgb {
      class Flasher {
 
      public:
+	  Flasher();
+
 	  void load(CaptureSettings&) const;
 	  void save(const CaptureSettings&) const;
      };
