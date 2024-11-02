@@ -9,3 +9,7 @@ zxrgb::Led::Led() {
      pinMode(LED_BUILTIN, OUTPUT);
      off();
 }
+
+void zxrgb::Led::on() const {
+     digitalWrite(LED_BUILTIN, HIGH);
+}
