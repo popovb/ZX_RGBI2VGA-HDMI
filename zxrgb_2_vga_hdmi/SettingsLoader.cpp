@@ -113,6 +113,13 @@ bool zxrgb::SettingsLoader::inv_pin_mask(const char* s, int v) const {
      return true;
 }
 
+bool zxrgb::SettingsLoader::len_vs(const char* s, int v) const {
+     if (! check(s + 1, "cap_len_VS") ) return false;
+     if (! check(s[0]) ) return false;
+     set(cs.len_vs, s, v);
+     return true;
+}
+
 bool zxrgb::SettingsLoader::check(char v) const {
      if (v == 'w') return true;
      if (v == 'r') return true;
@@ -124,7 +131,6 @@ bool zxrgb::SettingsLoader::check(const char* a, const char* b) const {
      return false;
 }
 /*
-  if (strcmp(s_key+1, "cap_len_VS")==0) CAP_SET_LOAD(capture_setings.len_VS,int)
   if (strcmp(s_key+1, "c_mode")==0) CAP_SET_LOAD(capture_setings.c_mode,c_mode_t)
   if (strcmp(s_key+1, "wide_mode")==0) CAP_SET_LOAD(capture_setings.is_wide_mode,int)
   
