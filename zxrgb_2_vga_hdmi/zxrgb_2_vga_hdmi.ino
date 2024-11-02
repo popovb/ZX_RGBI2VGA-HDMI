@@ -8,11 +8,11 @@
 #include "HDMI.h"
 #include "VideoBuffers.hpp"
 #include "PicturesDrawer.hpp"
-//#include "SettingsLoader.hpp"
 #include "CaptureSettingsChecker.hpp"
 #include "SerialReactor.hpp"
+#include "Flasher.hpp"
 
-#define printf Serial.printf
+// #define printf Serial.printf
 
 zxrgb::CaptureSettings capture_setings;
 
@@ -24,6 +24,8 @@ bool is_start_core0=false;
 void setup() {
      using namespace zxrgb;
      auto& vbs = get_video_buffers();
+
+		 Flasher flshr;
 
      vreg_set_voltage(VREG_VOLTAGE_1_25);
      sleep_ms(100);
@@ -52,34 +54,11 @@ void setup() {
 					sr.handle();
 
 					if (sr.need_to_save()) {
-							 //
-							 // TODO
-							 //
+							 flshr.save(capture_setings);
+							 Serial.printf("saving data\n");
 					}
 		 }
 			 /*
-					SettingsLoader sl;
-
-					char s_key[20];
-					int s_data;
-
-					bool is_save=false;
-					//цикл с разбором команд
-					while (true) {
-							 String s1=Serial.readStringUntil('\n');
-							 if (s1.length()==0) continue;
-							 sscanf(s1.c_str(),"%19s%d",s_key,&s_data);
-
-
-							 if (strcmp(s_key, "ping")==0) { printf("ping ok\n"); continue;};
-							 if (strcmp(s_key, "mode")==0) { printf("mode 0\n"); continue;};
-
-							 if (strcmp(s_key, "exit")==0) { printf("exit ok\n"); break;};
-							 if (strcmp(s_key, "save")==0) { is_save=true; printf("saving...\n"); break;};
-							 if (! sl.load(capture_setings, s_key + 1))
-										printf("wrong command\n");
-					}
-
 //сохранение параметров
 					if (is_save)
 					{
