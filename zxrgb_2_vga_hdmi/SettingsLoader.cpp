@@ -120,6 +120,13 @@ bool zxrgb::SettingsLoader::len_vs(const char* s, int v) const {
      return true;
 }
 
+bool zxrgb::SettingsLoader::color_mode(const char* s, int v) const {
+     if (! check(s + 1, "c_mode") ) return false;
+     if (! check(s[0]) ) return false;
+     set(cs.color_mode, s, v);
+     return true;
+}
+
 bool zxrgb::SettingsLoader::check(char v) const {
      if (v == 'w') return true;
      if (v == 'r') return true;
@@ -131,7 +138,6 @@ bool zxrgb::SettingsLoader::check(const char* a, const char* b) const {
      return false;
 }
 /*
-  if (strcmp(s_key+1, "c_mode")==0) CAP_SET_LOAD(capture_setings.c_mode,c_mode_t)
   if (strcmp(s_key+1, "wide_mode")==0) CAP_SET_LOAD(capture_setings.is_wide_mode,int)
   
 printf("wrong command\n");
