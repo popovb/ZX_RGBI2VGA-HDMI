@@ -12,12 +12,7 @@
 #include "SerialReactor.hpp"
 #include "Flasher.hpp"
 
-// #define printf Serial.printf
-
 zxrgb::CaptureSettings capture_setings;
-
-// int data_for_save[FLASH_PAGE_SIZE/sizeof(int)]; 
-const int *flash_data_for_save = (const int *) (XIP_BASE + (PICO_FLASH_SIZE_BYTES - FLASH_SECTOR_SIZE));
 
 bool is_start_core0=false;
 
@@ -25,30 +20,21 @@ void setup() {
      using namespace zxrgb;
      auto& vbs = get_video_buffers();
 
-		 Flasher flshr;
-
      vreg_set_voltage(VREG_VOLTAGE_1_25);
      sleep_ms(100);
      set_sys_clock_khz(252000, true);
      sleep_ms(10);
      Serial.begin(115200);
 
-//      //загружаем ранее сохранённые данные заxвата
-     memcpy(&capture_setings,
-						flash_data_for_save,
-						sizeof(zxrgb::CaptureSettings));
-     // memset(&capture_setings,0,sizeof(cap_set_t));//test
+		 Flasher flshr;
+		 flshr.load(capture_setings);
 
-     // подправляем , если в ячйках мусор
-     // check_cap_data(&capture_setings);
 		 CaptureSettingsChecker csc;
 		 csc.check(capture_setings);
 
 		 pinMode(LED_BUILTIN, OUTPUT);
      digitalWrite(LED_BUILTIN, HIGH);  // если попадём в настройки после wdt_reboot, то индикатор это покажет
 
- 
-///////////////////////////////////////////////////////////////////
      if (watchdog_caused_reboot()) {
 					SerialReactor sr(SerialReactor::Mode0, capture_setings);
 					sr.handle();
@@ -58,25 +44,7 @@ void setup() {
 							 Serial.printf("saving data\n");
 					}
 		 }
-			 /*
-//сохранение параметров
-					if (is_save)
-					{
-							 // check_cap_data(&capture_setings);
-							 csc.check(capture_setings);
-							 uint32_t ints = save_and_disable_interrupts();
-							 flash_range_erase((PICO_FLASH_SIZE_BYTES - FLASH_SECTOR_SIZE), FLASH_SECTOR_SIZE);                           
-							 flash_range_program((PICO_FLASH_SIZE_BYTES - FLASH_SECTOR_SIZE), ( uint8_t*) &capture_setings, FLASH_PAGE_SIZE);
-							 restore_interrupts (ints);
 
-							 printf("saving data\n");
-					};
-			 
-
-     }*/
-		 
-///////////////////////////////////////////////////////////////////     
-     
      if (capture_setings.x3_buff)
 					vbs.set_mode(VideoBuffers::X_3);
      else
@@ -84,7 +52,6 @@ void setup() {
 
      digitalWrite(LED_BUILTIN, LOW);  // сбрасываем индикаторный светодиод
 
-     //draw_hello_image();
      PicturesDrawer pd;
      pd.hello();
 
