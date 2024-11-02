@@ -5,6 +5,7 @@
 #include "Flasher.hpp"
 #include <hardware/sync.h>
 #include <hardware/flash.h>
+#include <cstring>
 
 void zxrgb::Flasher::save(const CaptureSettings& cs) const {
      u32 i = save_and_disable_interrupts();
@@ -17,6 +18,12 @@ void zxrgb::Flasher::save(const CaptureSettings& cs) const {
 			 FLASH_PAGE_SIZE);
      restore_interrupts(i);
 }
+
+void zxrgb::Flasher::load(CaptureSettings& cs) const {
+     u32 offset = PICO_FLASH_SIZE_BYTES - FLASH_SECTOR_SIZE;
+     memcpy(&cs, (u32*)(XIP_BASE + offset), sizeof(CaptureSettings));
+}
+
 /*
 // Flash-based address of the last sector
 #define FLASH_TARGET_OFFSET (PICO_FLASH_SIZE_BYTES - FLASH_SECTOR_SIZE)
@@ -34,7 +41,7 @@ addr = XIP_BASE +  FLASH_TARGET_OFFSET
 const int *flash_data_for_save = (const int *) (XIP_BASE + (PICO_FLASH_SIZE_BYTES - FLASH_SECTOR_SIZE));
 
 
-//      //загружаем ранее сохранённые данные заxвата
+//загружаем ранее сохранённые данные заxвата
      memcpy(&capture_setings,
      flash_data_for_save,
      sizeof(zxrgb::CaptureSettings));
