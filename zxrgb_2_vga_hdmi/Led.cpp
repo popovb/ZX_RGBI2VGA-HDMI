@@ -13,3 +13,7 @@ zxrgb::Led::Led() {
 void zxrgb::Led::on() const {
      digitalWrite(LED_BUILTIN, HIGH);
 }
+
+void zxrgb::Led::off() const {
+     digitalWrite(LED_BUILTIN, LOW);
+}
