@@ -52,7 +52,7 @@ namespace zxrgb {
 template<class T>
 void zxrgb::SettingsLoader::set(T& csv, const char* s, int v) const {
      if (s[0] == 'w') {
-	  csv = v;
+	  csv = (T)v;
 	  CaptureSettingsChecker csc;
 	  csc.check(cs);
      }

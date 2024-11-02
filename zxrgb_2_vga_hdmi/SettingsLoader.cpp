@@ -43,6 +43,13 @@ bool zxrgb::SettingsLoader::shift_y(const char* s, int v) const {
      return true;
 }
 
+bool zxrgb::SettingsLoader::clk_mode(const char* s, int v) const {
+     if (! check(s + 1, "cap_p_clk_mode") ) return false;
+     if (! check(s[0]) ) return false;
+     set(cs.clk_mode, s, v);
+     return true;
+}
+
 bool zxrgb::SettingsLoader::check(char v) const {
      if (v == 'w') return true;
      if (v == 'r') return true;
@@ -60,7 +67,6 @@ bool zxrgb::SettingsLoader::check(const char* a, const char* b) const {
   if (strcmp(s_key+1, "cap_ext_f_div")==0) CAP_SET_LOAD(capture_setings.ext_freq_div,int)
   if (strcmp(s_key+1, "cap_sync_mode")==0) CAP_SET_LOAD(capture_setings.in_sync_mode,in_sync_mode_t)
   if (strcmp(s_key+1, "cap_len_VS")==0) CAP_SET_LOAD(capture_setings.len_VS,int)
-  if (strcmp(s_key+1, "cap_p_clk_mode")==0) CAP_SET_LOAD(capture_setings.p_clk_mode,p_clk_mode_t)
   if (strcmp(s_key+1, "video_out")==0) CAP_SET_LOAD(capture_setings.video_out_mode,video_out_mode_t)
   if (strcmp(s_key+1, "cap_int_f")==0) CAP_SET_LOAD(capture_setings.int_freq,int)
   if (strcmp(s_key+1, "cap_in_inv_mask")==0) CAP_SET_LOAD(capture_setings.inv_capture_pin_mask,int)
