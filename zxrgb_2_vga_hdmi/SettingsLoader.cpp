@@ -3,7 +3,6 @@
 //
 
 #include "SettingsLoader.hpp"
-#include <Arduino.h>
 
 zxrgb::SettingsLoader::SettingsLoader(CaptureSettings& v):
      cs(v)

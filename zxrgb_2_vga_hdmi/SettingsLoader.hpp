@@ -3,10 +3,13 @@
 //
 
 #include "CaptureSettings.hpp"
+#include "CaptureSettingsChecker.hpp"
+#include <Arduino.h>
 
 #ifndef _ZXRGB_SETTINGS_LOADER_HPP_
 #define _ZXRGB_SETTINGS_LOADER_HPP_
 
+///////////////////////////////////////////////////////////////////
 namespace zxrgb {
 
      class SettingsLoader {
@@ -43,4 +46,17 @@ namespace zxrgb {
 	  void set(T&, const char*, int) const;
      };
 }
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
+template<class T>
+void zxrgb::SettingsLoader::set(T& csv, const char* s, int v) const {
+     if (s[0] == 'w') {
+	  csv = v;
+	  CaptureSettingsChecker csc;
+	  csc.check(cs);
+     }
+     Serial.printf("%s %d\n", s, csv);
+}
+///////////////////////////////////////////////////////////////////
 #endif // _ZXRGB_SETTINGS_LOADER_HPP_
