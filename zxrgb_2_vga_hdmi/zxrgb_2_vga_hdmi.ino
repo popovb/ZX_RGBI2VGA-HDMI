@@ -33,10 +33,6 @@ void setup() {
 
 		 Led led;
 		 led.on();
-		 /*
-		 pinMode(LED_BUILTIN, OUTPUT);
-     digitalWrite(LED_BUILTIN, HIGH);  // если попадём в настройки после wdt_reboot, то индикатор это покажет
-		 */
 
      if (watchdog_caused_reboot()) {
 					SerialReactor sr(SerialReactor::Mode0, capture_setings);
@@ -53,7 +49,6 @@ void setup() {
      else
 					vbs.set_mode(VideoBuffers::X_1);
 
-     //digitalWrite(LED_BUILTIN, LOW);  // сбрасываем индикаторный светодиод
 		 led.off();
 
      PicturesDrawer pd;
