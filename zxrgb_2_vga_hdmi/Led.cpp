@@ -3,7 +3,9 @@
 //
 
 #include "Led.hpp"
+#include <Arduino.h>
 
 zxrgb::Led::Led() {
+     pinMode(LED_BUILTIN, OUTPUT);
      off();
 }
