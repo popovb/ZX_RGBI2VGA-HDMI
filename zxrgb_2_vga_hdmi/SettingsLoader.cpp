@@ -64,6 +64,13 @@ bool zxrgb::SettingsLoader::sync_mode(const char* s, int v) const {
      return true;
 }
 
+bool zxrgb::SettingsLoader::x3_buff(const char* s, int v) const {
+     if (! check(s + 1, "is_3X_bufmode") ) return false;
+     if (! check(s[0]) ) return false;
+     set(cs.x3_buff, s, v);
+     return true;
+}
+
 bool zxrgb::SettingsLoader::check(char v) const {
      if (v == 'w') return true;
      if (v == 'r') return true;
@@ -82,7 +89,6 @@ bool zxrgb::SettingsLoader::check(const char* a, const char* b) const {
   if (strcmp(s_key+1, "cap_len_VS")==0) CAP_SET_LOAD(capture_setings.len_VS,int)
   if (strcmp(s_key+1, "cap_int_f")==0) CAP_SET_LOAD(capture_setings.int_freq,int)
   if (strcmp(s_key+1, "cap_in_inv_mask")==0) CAP_SET_LOAD(capture_setings.inv_capture_pin_mask,int)
-  if (strcmp(s_key+1, "is_3X_bufmode")==0) CAP_SET_LOAD(capture_setings.is_3X_Buf,int)
   if (strcmp(s_key+1, "c_mode")==0) CAP_SET_LOAD(capture_setings.c_mode,c_mode_t)
   if (strcmp(s_key+1, "wide_mode")==0) CAP_SET_LOAD(capture_setings.is_wide_mode,int)
   
