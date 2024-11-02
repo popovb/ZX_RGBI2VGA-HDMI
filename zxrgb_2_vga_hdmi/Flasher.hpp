@@ -16,6 +16,9 @@ namespace zxrgb {
 
 	  void load(CaptureSettings&) const;
 	  void save(const CaptureSettings&) const;
+
+     private:
+	  const u32 offset;
      };
 }
 #endif // _ZXRGB_FLASHER_HPP_
