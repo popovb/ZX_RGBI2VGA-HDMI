@@ -1,8 +1,3 @@
-#include "pico/stdlib.h"
-#include "hardware/vreg.h"
-#include "hardware/flash.h"
-#include "stdio.h"
-
 #include "rgb_capture.h"
 #include "VGA.h"
 #include "HDMI.h"
@@ -11,6 +6,8 @@
 #include "CaptureSettingsChecker.hpp"
 #include "SerialReactor.hpp"
 #include "Flasher.hpp"
+
+#include "hardware/vreg.h"
 
 zxrgb::CaptureSettings capture_setings;
 
