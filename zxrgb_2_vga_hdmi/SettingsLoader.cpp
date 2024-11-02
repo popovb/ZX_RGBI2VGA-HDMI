@@ -99,6 +99,13 @@ bool zxrgb::SettingsLoader::delay_rise(const char* s, int v) const {
      return true;
 }
 
+bool zxrgb::SettingsLoader::delay_fall(const char* s, int v) const {
+     if (! check(s + 1, "cap_delay_fall") ) return false;
+     if (! check(s[0]) ) return false;
+     set(cs.delay_fall, s, v);
+     return true;
+}
+
 bool zxrgb::SettingsLoader::check(char v) const {
      if (v == 'w') return true;
      if (v == 'r') return true;
@@ -110,7 +117,6 @@ bool zxrgb::SettingsLoader::check(const char* a, const char* b) const {
      return false;
 }
 /*
-  if (strcmp(s_key+1, "cap_delay_fall")==0) CAP_SET_LOAD(capture_setings.capture_delay_fall,int)
   if (strcmp(s_key+1, "cap_len_VS")==0) CAP_SET_LOAD(capture_setings.len_VS,int)
   if (strcmp(s_key+1, "cap_in_inv_mask")==0) CAP_SET_LOAD(capture_setings.inv_capture_pin_mask,int)
   if (strcmp(s_key+1, "c_mode")==0) CAP_SET_LOAD(capture_setings.c_mode,c_mode_t)
