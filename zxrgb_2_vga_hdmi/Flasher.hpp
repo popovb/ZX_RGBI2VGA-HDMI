@@ -12,9 +12,16 @@ namespace zxrgb {
      class Flasher {
 
      public:
-	  Flasher();
+	  // Flasher();
 
 	  void save(const CaptureSettings&) const;
      };
 }
 #endif // _ZXRGB_FLASHER_HPP_
+
+/*
+uint32_t ints = save_and_disable_interrupts();
+flash_range_erase((PICO_FLASH_SIZE_BYTES - FLASH_SECTOR_SIZE), FLASH_SECTOR_SIZE);                           
+flash_range_program((PICO_FLASH_SIZE_BYTES - FLASH_SECTOR_SIZE), ( uint8_t*) &capture_setings, FLASH_PAGE_SIZE);
+restore_interrupts (ints);
+*/
