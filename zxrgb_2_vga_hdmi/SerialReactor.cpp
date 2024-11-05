@@ -87,3 +87,17 @@ void zxrgb::SerialReactor::handle1() const {
      // TODO
      //
 }
+     /*
+     char s_key[20];
+     int s_data;
+
+     String s1=Serial.readStringUntil('\n');
+     if (s1.length()==0) return;
+     sscanf(s1.c_str(),"%19s%d",s_key,&s_data);
+    
+     if (strcmp(s_key, "ping")==0) { printf("ping ok\n"); return;};
+     if (strcmp(s_key, "reset")==0 || strcmp(s_key, "restart")==0 ) {printf("reset...\n");rp2040.restart();};
+     if (strcmp(s_key, "mode")==0) { printf("mode 1\n"); return;};
+     if (strcmp(s_key+1, "cap_sh_x")==0) {if(s_key[0]=='w') set_cap_shx(s_data); return;}
+     if (strcmp(s_key+1, "cap_sh_y")==0) {if(s_key[0]=='w') set_cap_shy(s_data); return;}
+     */

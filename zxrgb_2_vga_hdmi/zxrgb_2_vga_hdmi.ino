@@ -15,8 +15,7 @@ zxrgb::CaptureSettings capture_setings;
 bool core0_is_started = false;
 
 void setup() {
-     using namespace zxrgb;
-     auto& vbs = get_video_buffers();
+     auto& vbs = zxrgb::get_video_buffers();
 
      vreg_set_voltage(VREG_VOLTAGE_1_25);
      sleep_ms(100);
@@ -24,17 +23,18 @@ void setup() {
      sleep_ms(10);
      Serial.begin(115200);
 
-     Flasher flshr;
+     zxrgb::Flasher flshr;
      flshr.load(capture_setings);
 
-     CaptureSettingsChecker csc;
+     zxrgb::CaptureSettingsChecker csc;
      csc.check(capture_setings);
 
-     Led led;
+     zxrgb::Led led;
      led.on();
 
      if (watchdog_caused_reboot()) {
-	  SerialReactor sr(SerialReactor::Mode0, capture_setings);
+	  zxrgb::SerialReactor sr(zxrgb::SerialReactor::Mode0,
+				  capture_setings);
 	  sr.handle();
 
 	  if (sr.need_to_save()) {
@@ -44,22 +44,22 @@ void setup() {
      }
 
      if (capture_setings.x3_buff)
-	  vbs.set_mode(VideoBuffers::X_3);
+	  vbs.set_mode(zxrgb::VideoBuffers::X_3);
      else
-	  vbs.set_mode(VideoBuffers::X_1);
+	  vbs.set_mode(zxrgb::VideoBuffers::X_1);
 
      led.off();
 
-     PicturesDrawer pd;
+     zxrgb::PicturesDrawer pd;
      pd.hello();
 
      switch (capture_setings.video_mode) {
 
-     case VideoMode::Vga:
+     case zxrgb::VideoMode::Vga:
 	  startVGA();
 	  break;
 
-     case VideoMode::Hdmi:
+     case zxrgb::VideoMode::Hdmi:
 	  startHDMI();
 	  break;
 
@@ -70,21 +70,11 @@ void setup() {
      core0_is_started = true;
 }
 
-// the loop function runs over and over again forever
 void loop() {
-     char s_key[20];
-     int s_data;
      sleep_ms(3);
-
-     String s1=Serial.readStringUntil('\n');
-     if (s1.length()==0) return;
-     sscanf(s1.c_str(),"%19s%d",s_key,&s_data);
-    
-     if (strcmp(s_key, "ping")==0) { printf("ping ok\n"); return;};
-     if (strcmp(s_key, "reset")==0 || strcmp(s_key, "restart")==0 ) {printf("reset...\n");rp2040.restart();};
-     if (strcmp(s_key, "mode")==0) { printf("mode 1\n"); return;};
-     if (strcmp(s_key+1, "cap_sh_x")==0) {if(s_key[0]=='w') set_cap_shx(s_data); return;}
-     if (strcmp(s_key+1, "cap_sh_y")==0) {if(s_key[0]=='w') set_cap_shy(s_data); return;}
+     zxrgb::SerialReactor sr(zxrgb::SerialReactor::Mode1,
+			     capture_setings);
+     sr.handle();
 }
 
 void setup1() {
