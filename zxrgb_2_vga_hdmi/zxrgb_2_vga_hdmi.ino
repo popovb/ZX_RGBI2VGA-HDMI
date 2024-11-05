@@ -12,8 +12,7 @@
 #include <hardware/vreg.h>
 
 zxrgb::CaptureSettings capture_setings;
-
-bool is_start_core0=false;
+bool core0_is_started = false;
 
 void setup() {
      using namespace zxrgb;
@@ -25,39 +24,50 @@ void setup() {
      sleep_ms(10);
      Serial.begin(115200);
 
-		 Flasher flshr;
-		 flshr.load(capture_setings);
+     Flasher flshr;
+     flshr.load(capture_setings);
 
-		 CaptureSettingsChecker csc;
-		 csc.check(capture_setings);
+     CaptureSettingsChecker csc;
+     csc.check(capture_setings);
 
-		 Led led;
-		 led.on();
+     Led led;
+     led.on();
 
      if (watchdog_caused_reboot()) {
-					SerialReactor sr(SerialReactor::Mode0, capture_setings);
-					sr.handle();
+	  SerialReactor sr(SerialReactor::Mode0, capture_setings);
+	  sr.handle();
 
-					if (sr.need_to_save()) {
-							 flshr.save(capture_setings);
-							 Serial.printf("saving data\n");
-					}
-		 }
+	  if (sr.need_to_save()) {
+	       flshr.save(capture_setings);
+	       Serial.printf("saving data\n");
+	  }
+     }
 
      if (capture_setings.x3_buff)
-					vbs.set_mode(VideoBuffers::X_3);
+	  vbs.set_mode(VideoBuffers::X_3);
      else
-					vbs.set_mode(VideoBuffers::X_1);
+	  vbs.set_mode(VideoBuffers::X_1);
 
-		 led.off();
+     led.off();
 
      PicturesDrawer pd;
      pd.hello();
 
-     if (capture_setings.video_mode == VideoMode::Vga) {startVGA();}//setVGAWideMode(capture_setings.is_wide_mode);
-     if (capture_setings.video_mode == VideoMode::Hdmi) { startHDMI();};
-  
-     is_start_core0=true;
+     switch (capture_setings.video_mode) {
+
+     case VideoMode::Vga:
+	  startVGA();
+	  break;
+
+     case VideoMode::Hdmi:
+	  startHDMI();
+	  break;
+
+     default:
+	  return;
+     }
+
+     core0_is_started = true;
 }
 
 // the loop function runs over and over again forever
@@ -78,7 +88,7 @@ void loop() {
 }
 
 void setup1() {
-     while(! is_start_core0) sleep_ms(3);
+     while(! core0_is_started) sleep_ms(3);
      startCapture(&capture_setings);
 }
 
