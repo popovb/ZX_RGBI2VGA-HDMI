@@ -49,15 +49,10 @@ void zxrgb::SerialReactor::handle1() const {
      if (handle_reset()) return;
      if (handle_restart()) return;
      if (handle_mode()) return;
-     //
-     // TODO
-     //
+
+     sl.load(key, value);
 }
-     /*
-     if (strcmp(s_key, "reset")==0 || strcmp(s_key, "restart")==0 ) {printf("reset...\n");rp2040.restart();};
-     if (strcmp(s_key+1, "cap_sh_x")==0) {if(s_key[0]=='w') set_cap_shx(s_data); return;}
-     if (strcmp(s_key+1, "cap_sh_y")==0) {if(s_key[0]=='w') set_cap_shy(s_data); return;}
-     */
+
 bool zxrgb::SerialReactor::handle_ping() const {
      if (! check("ping") ) return false;
      Serial.printf("ping ok\n");
