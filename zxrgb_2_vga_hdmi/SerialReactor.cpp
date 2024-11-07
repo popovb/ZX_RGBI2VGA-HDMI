@@ -71,6 +71,13 @@ bool zxrgb::SerialReactor::handle_reset() const {
      return true;
 }
 
+bool zxrgb::SerialReactor::handle_restart() const {
+     if (! check("restart") ) return false;
+     print_reset();
+     restart();
+     return true;
+}
+
 void zxrgb::SerialReactor::print_reset() const {
      Serial.printf("reset...\n");
 }
