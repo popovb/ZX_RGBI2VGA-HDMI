@@ -41,6 +41,8 @@ namespace zxrgb {
 	  bool handle_exit() const;
 	  bool handle_reset() const;
 	  bool handle_restart() const;
+	  void print_reset() const;
+	  void restart() const;
 	  bool handle_save();
 	  bool check(const char*) const;
      };

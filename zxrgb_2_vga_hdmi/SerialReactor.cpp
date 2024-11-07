@@ -65,6 +65,14 @@ bool zxrgb::SerialReactor::handle_ping() const {
      return true;
 }
 
+bool zxrgb::SerialReactor::handle_reset() const {
+     if (! check("reset") ) return false;
+     // Serial.printf("ping ok\n");
+     print_reset();
+     restart();
+     return true;
+}
+
 bool zxrgb::SerialReactor::handle_exit() const {
      if (! check("exit") ) return false;
      Serial.printf("exit ok\n");
