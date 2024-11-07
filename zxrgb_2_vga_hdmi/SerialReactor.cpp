@@ -75,6 +75,10 @@ void zxrgb::SerialReactor::print_reset() const {
      Serial.printf("reset...\n");
 }
 
+void zxrgb::SerialReactor::restart() const {
+     rp2040.restart();
+}
+
 bool zxrgb::SerialReactor::handle_exit() const {
      if (! check("exit") ) return false;
      Serial.printf("exit ok\n");
