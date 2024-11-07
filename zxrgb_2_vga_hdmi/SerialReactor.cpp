@@ -45,12 +45,15 @@ void zxrgb::SerialReactor::handle1() const {
      if (s.length() == 0) return;
      sscanf(s.c_str(), "%19s%d" , key, &value);
 
+     if (handle_ping()) return;
+     if (handle_reset()) return;
+     if (handle_restart()) return;
+     if (handle_mode()) return;
      //
      // TODO
      //
 }
      /*
-     if (strcmp(s_key, "ping")==0) { printf("ping ok\n"); return;};
      if (strcmp(s_key, "reset")==0 || strcmp(s_key, "restart")==0 ) {printf("reset...\n");rp2040.restart();};
      if (strcmp(s_key, "mode")==0) { printf("mode 1\n"); return;};
      if (strcmp(s_key+1, "cap_sh_x")==0) {if(s_key[0]=='w') set_cap_shx(s_data); return;}

@@ -39,6 +39,8 @@ namespace zxrgb {
 	  bool handle_ping() const;
 	  bool handle_mode() const;
 	  bool handle_exit() const;
+	  bool handle_reset() const;
+	  bool handle_restart() const;
 	  bool handle_save();
 	  bool check(const char*) const;
      };
