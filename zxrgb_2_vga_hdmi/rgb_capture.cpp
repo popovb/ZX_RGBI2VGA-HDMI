@@ -10,6 +10,7 @@
 #include "VideoBuffers.hpp"
 #include "Buffer.hpp"
 #include "CaptureSettingsChecker.hpp"
+#include "PioProgHolder.hpp"
 
 #include <string.h>
 #include <hardware/structs/systick.h>
