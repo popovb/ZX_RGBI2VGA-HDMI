@@ -23,6 +23,7 @@
 #include "CapturedPins.hpp"
 #include "VideoBuffers.hpp"
 #include "Buffer.hpp"
+#include "CaptureSettingsChecker.hpp"
 
 using namespace zxrgb;
 

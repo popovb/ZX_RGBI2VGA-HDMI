@@ -1,9 +1,6 @@
 #pragma once
 
-#include "stdbool.h"
-#include "inttypes.h"
-#include "CaptureSettingsChecker.hpp"
-#include "g_config.h"
+#include "CaptureSettings.hpp"
 
 extern uint32_t i_frame;
 
