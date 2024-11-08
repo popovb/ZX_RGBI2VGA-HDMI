@@ -1,29 +1,29 @@
-#include <stdio.h>
-#include "pico/stdlib.h"
-
-
-
-#include "string.h"
-
-#include "hardware/clocks.h"
-
-#include "hardware/structs/pll.h"
-#include "hardware/structs/systick.h"
-
-#include "hardware/dma.h"
-#include "hardware/irq.h"
+// #include <stdio.h>
+// #include "pico/stdlib.h"
+// #include "hardware/clocks.h"
+// #include "hardware/structs/pll.h"
+// #include "hardware/irq.h"
+// #include "PIO_capture_program.h"
 
 #include "rgb_capture.h"
-#include "PIO_capture_program.h"
+#include "CapturedPins.hpp"
+#include "VideoBuffers.hpp"
+#include "Buffer.hpp"
+#include "CaptureSettingsChecker.hpp"
+
+#include <string.h>
+#include <hardware/structs/systick.h>
+#include <hardware/dma.h>
+#include <Arduino.h>
 
 #if !PICO_NO_HARDWARE
 #include "hardware/pio.h"
 #endif
 
-#include "CapturedPins.hpp"
-#include "VideoBuffers.hpp"
-#include "Buffer.hpp"
-#include "CaptureSettingsChecker.hpp"
+//определение PIO для захвата
+#define PIO_CAP (pio1)
+//номера SM для захвата
+#define SM_CAP  (0)
 
 using namespace zxrgb;
 
@@ -394,10 +394,5 @@ void startCapture(CaptureSettings* cap_data) {
    
 
      dma_start_channel_mask((1u << dma_chan)) ;
-     G_PRINTF_INFO("init RGB capture \n");
-
-    
-
-
+     Serial.printf("init RGB capture \n");
 };
-

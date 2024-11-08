@@ -30,9 +30,4 @@
 #define pio_HDMI0 pio0
 #define sm_HDMI0 0
 
-//определение PIO для захвата
-#define PIO_CAP (pio1)
-//номера SM для захвата
-#define SM_CAP  (0)
-
 #define G_PRINTF_INFO  printf
