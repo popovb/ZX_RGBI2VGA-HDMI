@@ -11,6 +11,7 @@
 #include "Buffer.hpp"
 #include "CaptureSettingsChecker.hpp"
 #include "PioProgHolder.hpp"
+#include "SelfSyncProg.hpp"
 
 #include <string.h>
 #include <hardware/structs/systick.h>
