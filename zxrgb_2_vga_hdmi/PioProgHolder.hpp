@@ -2,6 +2,7 @@
 // Copyright (c) 2024 Boris Popov <popov@whitekefir.ru>
 //
 
+#include "PioProg.hpp"
 #include "PioProgType.hpp"
 
 #ifndef _ZXRGB_PIO_PROG_HOLDER_HPP_
@@ -15,7 +16,7 @@ namespace zxrgb {
      public:
 	  PioProgHolder();
 
-	  PioProg* get(PioProgType::type_t)
+	  PioProg* get(PioProgType::type_t);
 
      private:
      };
