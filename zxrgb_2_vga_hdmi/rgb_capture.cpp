@@ -219,20 +219,6 @@ void __not_in_flash_func(dma_handler_capture())
 
 }
 
-void set_cap_shx(int sh_x) {
-     cap_set.shift_x = (sh_x > cap_set_MAX.shift_x) ?
-	  cap_set_MAX.shift_x : sh_x;
-     cap_set.shift_x = (sh_x < cap_set_MIN.shift_x) ?
-	  cap_set_MIN.shift_x : sh_x;
-};
-
-void set_cap_shy(int sh_y) {
-     cap_set.shift_y = (sh_y > cap_set_MAX.shift_y) ?
-	  cap_set_MAX.shift_y : sh_y;
-     cap_set.shift_y = (sh_y < cap_set_MIN.shift_y) ?
-	  cap_set_MIN.shift_y : sh_y;
-};
-
 void startCapture(CaptureSettings* cap_data) {   
      //
 
