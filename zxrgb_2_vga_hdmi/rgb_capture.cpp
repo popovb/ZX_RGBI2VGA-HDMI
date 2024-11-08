@@ -262,19 +262,31 @@ void startCapture(CaptureSettings* cap_data) {
      //     capture_program.instructions=capture_program_instructions_inv;
      uint offset;
      pio_sm_config c;
+     auto& pph = get_pio_prog_holder();
      switch (cap_set.clk_mode) {
 
      case ClockMode::SelfSync:
-        
+     {
+	  auto* s = pph.get(PioProgType::SelfSync);
+	  if (s == nullptr) break;
+	  auto& pp = (*(SelfSyncProg*)s);
+	  pp.set_delay(cap_set.delay);
+	  offset = pio_add_program(PIO_CAP, pp.get_pio_program());
+	  c = pio_get_default_sm_config();
+	  sm_config_set_wrap(&c,
+			     offset,
+			     offset + (pp.get_pio_program()->length - 1));
+	  /* TODO
 	  pio_program0_instructions[0]|=((cap_set.delay&0b11111)<<8);
-
 	  offset = pio_add_program(PIO_CAP, &pio_program0_CAP);
 	  c = pio_get_default_sm_config();          
 	  sm_config_set_wrap(&c, offset, offset + (pio_program0_CAP.length-1));
-
+	  */
 	  break;
+     }
 
      case ClockMode::ExtSync:
+	  /* TODO
 	  pio_program1_instructions[0]|=((cap_set.delay&0b11111)<<8);
 	  pio_program1_instructions[1]|=((cap_set.ext_freq_div-1)&0b11111);
 	  pio_program1_instructions[8]|=((cap_set.ext_freq_div-1)&0b11111);
@@ -282,10 +294,12 @@ void startCapture(CaptureSettings* cap_data) {
 	  offset = pio_add_program(PIO_CAP, &pio_program1_CAP);
 	  c = pio_get_default_sm_config();          
 	  sm_config_set_wrap(&c, offset, offset + (pio_program1_CAP.length-1));
+	  */
 
 	  break;
 
      case ClockMode::Z80Freq:
+	  /* TODO
 	  pio_program2_instructions[1]|=((cap_set.delay_rise&0b11111)<<8);
 	  pio_program2_instructions[5]|=((cap_set.delay_fall&0b11111)<<8);
  
@@ -293,6 +307,7 @@ void startCapture(CaptureSettings* cap_data) {
 	  offset = pio_add_program(PIO_CAP, &pio_program2_CAP);
 	  c = pio_get_default_sm_config();          
 	  sm_config_set_wrap(&c, offset, offset + (pio_program2_CAP.length-1));
+	  */
 	  break;
 
     
