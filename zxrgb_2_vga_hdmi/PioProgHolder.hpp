@@ -4,6 +4,7 @@
 
 #include "PioProg.hpp"
 #include "PioProgType.hpp"
+#include "Types.hpp"
 
 #ifndef _ZXRGB_PIO_PROG_HOLDER_HPP_
 #define _ZXRGB_PIO_PROG_HOLDER_HPP_
@@ -19,6 +20,8 @@ namespace zxrgb {
 	  PioProg* get(PioProgType::type_t);
 
      private:
+	  static const u8 len = 5;
+	  PioProg* pio_progs[len];
      };
      ///////////////////////////////////////////////
 
