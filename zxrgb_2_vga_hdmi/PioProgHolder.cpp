@@ -24,4 +24,9 @@ zxrgb::PioProgHolder::PioProgHolder():
 {
      return;
 }
+
+zxrgb::PioProg* zxrgb::PioProgHolder::get(PioProgType::type_t v) {
+     if (v >= len) return nullptr;
+     return pio_progs[v];
+}
 ///////////////////////////////////////////////////////////////////
