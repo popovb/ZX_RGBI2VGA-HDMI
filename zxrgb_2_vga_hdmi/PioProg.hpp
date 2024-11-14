@@ -2,6 +2,8 @@
 // Copyright (c) 2024 Boris Popov <popov@whitekefir.ru>
 //
 
+#include "hardware/pio.h"
+
 #ifndef _ZXRGB_PIO_PROG_HPP_
 #define _ZXRGB_PIO_PROG_HPP_
 
@@ -12,6 +14,8 @@ namespace zxrgb {
      public:
 	  PioProg();
 	  virtual ~PioProg() = 0;
+
+	  const pio_program* get_pio_program() const;
 
      private:
      };
