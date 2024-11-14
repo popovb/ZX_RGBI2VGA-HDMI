@@ -4,6 +4,7 @@
 
 #include "PioProg.hpp"
 #include "PioProgType.hpp"
+#include "SelfSyncProg.hpp"
 #include "Types.hpp"
 
 #ifndef _ZXRGB_PIO_PROG_HOLDER_HPP_
@@ -22,6 +23,9 @@ namespace zxrgb {
      private:
 	  static const u8 len = 5;
 	  PioProg* pio_progs[len];
+
+     private:
+	  SelfSyncProg ssp;
      };
      ///////////////////////////////////////////////
 
