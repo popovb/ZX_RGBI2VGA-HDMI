@@ -18,6 +18,7 @@ namespace zxrgb {
 	  void set_delay(u32);
 
      private:
+	  void init();
      };
 }
 #endif // _ZXRGB_SELF_SYNC_PROG_HPP_

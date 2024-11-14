@@ -4,6 +4,6 @@
 
 #include "PioProg.hpp"
 
-zxrgb::PioProg::~PioProg() {
-     return;
-}
+// zxrgb::PioProg::~PioProg() {
+//      return;
+// }

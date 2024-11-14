@@ -3,7 +3,6 @@
 //
 
 #include "Types.hpp"
-
 #include "hardware/pio.h"
 
 #ifndef _ZXRGB_PIO_PROG_HPP_
@@ -14,8 +13,6 @@ namespace zxrgb {
      class PioProg {
 
      public:
-	  virtual ~PioProg() = 0;
-
 	  const pio_program* get_pio_program() const;
 
      protected:
@@ -23,6 +20,7 @@ namespace zxrgb {
 	  u16 instructions[len];
 
      private:
+	  virtual void init() = 0;
      };
 }
 #endif // _ZXRGB_PIO_PROG_HPP_
