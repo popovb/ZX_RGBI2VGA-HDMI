@@ -7,7 +7,6 @@
 zxrgb::u16
 zxrgb::SelfSyncProg::cmds[] =
 {
-     // .wrap_target
      0xa042, //   0: nop
      0x4008, //   1: in pins, 8
      0x8020, //   2: push block
@@ -25,7 +24,6 @@ zxrgb::SelfSyncProg::cmds[] =
      0x00c0, //  14: jmp pin, 0
      0x00c0, //  15: jmp pin, 0
      0x0005, //  16: jmp 5
-     // .wrap
 };
 
 zxrgb::SelfSyncProg::SelfSyncProg() {

@@ -3,31 +3,31 @@
 //
 
 #include "ExtSyncProg.hpp"
-/*
+#include "CapturedPins.hpp"
+
+static zxrgb::u16 F = zxrgb::CapturedPins::f;
+
 zxrgb::u16
 zxrgb::ExtSyncProg::cmds[] =
 {
-     // .wrap_target
-     0xa042, //   0: nop
-     0x4008, //   1: in pins, 8
-     0x8020, //   2: push block
-     0xa842, //   3: nop [8]
-     0x00c1, //   4: jmp pin, 1
-     0x4008, //   5: in pins, 8
-     0x8020, //   6: push block
-     0x00c0, //   7: jmp pin, 0
-     0x00c0, //   8: jmp pin, 0
-     0x00c0, //   9: jmp pin, 0
-     0x00c0, //  10: jmp pin, 0
-     0x00c0, //  11: jmp pin, 0
-     0x00c0, //  12: jmp pin, 0
-     0x00c0, //  13: jmp pin, 0
-     0x00c0, //  14: jmp pin, 0
-     0x00c0, //  15: jmp pin, 0
-     0x0005, //  16: jmp 5
-     // .wrap
+     0xa042,            //  0: nop
+     0xe020,            //  1: set x, 0
+     (u16)(0x2000 | F), //  2: wait 1 gpio, 0
+     0x4008,            //  3: in pins, 8
+     (u16)(0x2080 | F), //  4: wait 0 gpio, 0
+     0x0042,            //  5: jmp x--, 2
+     0x8020,            //  6: push block
+     0x00c1,            //  7: jmp pin, 1
+     0xe020,            //  8: set x, 0
+     (u16)(0x2000 | F), //  9: wait 1 gpio, 0
+     0x00c0,            // 10: jmp pin, 0
+     0x4008,            // 11: in pins, 8
+     (u16)(0x2080 | F), // 12: wait 0 gpio, 1
+     0x0049,            // 13: jmp x--, 9
+     0x8020,            // 14: push block
+     0x0008,            // 15: jmp 8
 };
-*/
+
 zxrgb::ExtSyncProg::ExtSyncProg() {
      prog.instructions = cmds;
      prog.length = 16;
