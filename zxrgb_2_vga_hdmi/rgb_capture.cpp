@@ -288,17 +288,6 @@ void startCapture(CaptureSettings* cap_data) {
 	  auto& pp = (*(ExtSyncProg*)s);
 	  pp.set_delay(cap_set.delay);
 	  pp.set_ext_freq_div(cap_set.ext_freq_div);
-	  //
-	  // TODO
-	  //
-	  /* TODO
-	  pio_program1_instructions[0]|=((cap_set.delay&0b11111)<<8);
-	  pio_program1_instructions[1]|=((cap_set.ext_freq_div-1)&0b11111);
-	  pio_program1_instructions[8]|=((cap_set.ext_freq_div-1)&0b11111);
-	  offset = pio_add_program(PIO_CAP, &pio_program1_CAP);
-	  c = pio_get_default_sm_config();          
-	  sm_config_set_wrap(&c, offset, offset + (pio_program1_CAP.length-1));
-	  */
 	  offset = pio_add_program(PIO_CAP, pp.get_pio_program());
 	  c = pio_get_default_sm_config();
 	  sm_config_set_wrap(&c,
