@@ -27,13 +27,13 @@ zxrgb::ExtSyncProg::cmds[] =
      0x0005, //  16: jmp 5
      // .wrap
 };
-
+*/
 zxrgb::ExtSyncProg::ExtSyncProg() {
      prog.instructions = cmds;
-     prog.length = 17;
+     prog.length = 16;
      prog.origin = -1;
 }
-*/
+
 void zxrgb::ExtSyncProg::set_delay(u32 v) {
      cmds[0] |= ((v & 0b11111) << 8);
 }
