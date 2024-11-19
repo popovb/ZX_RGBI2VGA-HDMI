@@ -5,11 +5,14 @@
 #include "SelfSyncProg.hpp"
 
 zxrgb::SelfSyncProg::SelfSyncProg() {
+     init();
+}
+
+void zxrgb::SelfSyncProg::init() {
      //
      // TODO
      //
 }
-
 //       instructions{
 
 //       	  0x0000,
