@@ -37,3 +37,9 @@ zxrgb::ExtSyncProg::ExtSyncProg() {
 void zxrgb::ExtSyncProg::set_delay(u32 v) {
      cmds[0] |= ((v & 0b11111) << 8);
 }
+
+void zxrgb::ExtSyncProg::set_ext_freq_div(u32 v) {
+     u32 vv = (v - 1) & 0b11111;
+     cmds[1] |= vv;
+     cmds[8] |= vv;
+}
