@@ -33,3 +33,7 @@ zxrgb::SelfSyncProg::SelfSyncProg() {
      prog.length = 17;
      prog.origin = -1;
 }
+
+void zxrgb::SelfSyncProg::set_delay(u32 v) {
+     cmds[0] |= ((v & 0b11111) << 8);
+}
