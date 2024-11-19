@@ -19,6 +19,7 @@ namespace zxrgb {
 zxrgb::PioProgHolder::PioProgHolder():
      pio_progs{
 	  &ssp,
+	  &esp,
 	  nullptr,
      }
 {
