@@ -19,13 +19,6 @@ namespace zxrgb {
 
      protected:
 	  pio_program prog;
-
-     // protected:
-     // 	  static const u8 len = 17;
-     // 	  u16 instructions[len];
-
-     // private:
-     // 	  virtual void init() = 0;
      };
 }
 #endif // _ZXRGB_PIO_PROG_HPP_

@@ -18,7 +18,8 @@ namespace zxrgb {
 	  void set_delay(u32);
 
      private:
-	  static const u8 len;
+	  static const u8 len = 17;
+	  static u16 cmds[len];
      };
 }
 #endif // _ZXRGB_SELF_SYNC_PROG_HPP_
