@@ -308,15 +308,6 @@ void startCapture(CaptureSettings* cap_data) {
 	  sm_config_set_wrap(&c,
 			     offset,
 			     offset + (pp.get_pio_program()->length - 1));
-	  /* TODO
-	  pio_program2_instructions[1]|=((cap_set.delay_rise&0b11111)<<8);
-	  pio_program2_instructions[5]|=((cap_set.delay_fall&0b11111)<<8);
- 
-
-	  offset = pio_add_program(PIO_CAP, &pio_program2_CAP);
-	  c = pio_get_default_sm_config();          
-	  sm_config_set_wrap(&c, offset, offset + (pio_program2_CAP.length-1));
-	  */
 	  break;
      }
 
