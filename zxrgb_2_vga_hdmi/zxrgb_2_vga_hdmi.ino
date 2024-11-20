@@ -1,4 +1,4 @@
-#include "rgb_capture.h"
+#include "Capturer.hpp"
 #include "VGA.h"
 #include "HDMI.h"
 #include "VideoBuffers.hpp"
@@ -79,7 +79,9 @@ void loop() {
 
 void setup1() {
      while(! core0_is_started) sleep_ms(3);
-     startCapture(&capture_setings);
+     zxrgb::Capturer caper(capture_setings);
+     caper.start();
+     // startCapture(&capture_setings);
 }
 
 void loop1() {
