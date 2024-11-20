@@ -9,3 +9,12 @@ zxrgb::Capturer::Capturer(const CaptureSettings& v):
 {
      return;
 }
+
+void zxrgb::Capturer::start() const {
+     pin_init();
+     sm_init();
+     dma_init();
+     //
+     // TODO
+     //
+}

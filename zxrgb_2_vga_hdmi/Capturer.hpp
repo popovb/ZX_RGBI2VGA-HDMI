@@ -18,6 +18,11 @@ namespace zxrgb {
 
      private:
 	  const CaptureSettings& cs;
+
+     private:
+	  void pin_init() const;
+	  void sm_init() const;
+	  void dma_init() const;
      };
 }
 #endif // _ZXRGB_CAPTURER_HPP_

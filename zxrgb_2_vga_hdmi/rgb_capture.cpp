@@ -188,24 +188,17 @@ void __not_in_flash_func(dma_handler_capture())
      inx_VSs=inx_VS;
 
 }
-
+/*
 void startCapture(CaptureSettings* cap_data) {   
-     //
-
      // memcpy(&cap_set,cap_data,sizeof(cap_set_t));
      set_cap_data(cap_data);
      //check_cap_data(&cap_set);
 
-     for(int i=0;i<256;i++)
-     {
+     for(int i=0;i<256;i++) {
 	  uint8_t ch=i>>4;
 	  uint8_t cl=i&0xf;
-	  convertArr[i]=(ch<<4)|cl;//(pallete8[ch]<<8)|(pallete8[cl]);//(conv4to16bit(ch)<<16)|(conv4to16bit(cl));
-
+	  convertArr[i]=(ch<<4)|cl;
      }
-
-     //capture_buf=v_buf_get_in();
-
 
      gpio_init(TST_PIN);
      gpio_set_dir(TST_PIN,GPIO_OUT);
@@ -225,11 +218,6 @@ void startCapture(CaptureSettings* cap_data) {
 	  inv_mask>>=1;
      }
     
-
-     // if (b_phase)
-     //     capture_program.instructions=capture_program_instructions;
-     // else
-     //     capture_program.instructions=capture_program_instructions_inv;
      uint offset;
      pio_sm_config c;
      auto& pph = get_pio_prog_holder();
@@ -299,18 +287,8 @@ void startCapture(CaptureSettings* cap_data) {
 
      };
        
-   
-   
- 
-    
      DMA_BUF_ADDR_CAP[0]=&DMA_BUF_CAP[0][0];
      DMA_BUF_ADDR_CAP[1]=&DMA_BUF_CAP[1][0];
-     // DMA_BUF_ADDR_CAP[2]=&DMA_BUF_CAP[2][0];
-     // DMA_BUF_ADDR_CAP[3]=&DMA_BUF_CAP[3][0];
-  
-
-
-  
 
      int dma_chan0 = dma_claim_unused_channel(true);
      dma_chan  = dma_claim_unused_channel(true);
@@ -324,9 +302,6 @@ void startCapture(CaptureSettings* cap_data) {
      uint dreq=DREQ_PIO1_RX0+sm;
      if (PIO_CAP==pio0) dreq=DREQ_PIO0_RX0+sm;
         
-
-
-
      channel_config_set_dreq(&c0, dreq);
      channel_config_set_chain_to(&c0, dma_chan);                      
 
@@ -344,8 +319,7 @@ void startCapture(CaptureSettings* cap_data) {
     
      channel_config_set_read_increment(&c1, false);
      channel_config_set_write_increment(&c1, false);
-     channel_config_set_chain_to(&c1, dma_chan0);                         // chain to other channel
-
+     channel_config_set_chain_to(&c1, dma_chan0);
 
      dma_channel_configure(
 	  dma_chan,
@@ -356,7 +330,6 @@ void startCapture(CaptureSettings* cap_data) {
 	  false             // Don't start yet
 	  );
 
-
   
      dma_channel_set_irq1_enabled(dma_chan, true);
 
@@ -364,8 +337,7 @@ void startCapture(CaptureSettings* cap_data) {
      irq_set_exclusive_handler(DMA_IRQ_1, dma_handler_capture);
      irq_set_enabled(DMA_IRQ_1, true);
 
-   
-
      dma_start_channel_mask((1u << dma_chan)) ;
      Serial.printf("init RGB capture \n");
 };
+*/
