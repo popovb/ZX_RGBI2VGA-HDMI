@@ -33,6 +33,10 @@ zxrgb::Z80FreqProg::Z80FreqProg() {
      prog.length = 8;
      prog.origin = -1;
 }
+
+void zxrgb::Z80FreqProg::set_delay_rise(u32 v) {
+     cmds[1] |= ((v & 0b11111) << 8);
+}
 /*
 void zxrgb::Z80FreqProg::set_delay(u32 v) {
      cmds[0] |= ((v & 0b11111) << 8);
