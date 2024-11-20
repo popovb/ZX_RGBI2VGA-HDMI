@@ -15,6 +15,9 @@ namespace zxrgb {
 	  Capturer(const CaptureSettings&);
 
 	  void start() const;
+
+     private:
+	  const CaptureSettings& cs;
      };
 }
 #endif // _ZXRGB_CAPTURER_HPP_
