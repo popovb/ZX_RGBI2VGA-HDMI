@@ -3,6 +3,7 @@
 //
 
 #include "Capturer.hpp"
+#include <Arduino.h>
 
 ///////////////////////////////////////////////////////////////////
 static const zxrgb::u8 test_pin = 25;
@@ -27,5 +28,10 @@ void zxrgb::Capturer::start() const {
 void zxrgb::Capturer::pin_init() const {
      test_pin_init();
      captured_pin_init();
+}
+
+void zxrgb::Capturer::test_pin_init() const {
+     gpio_init(test_pin);
+     gpio_set_dir(test_pin, GPIO_OUT);
 }
 ///////////////////////////////////////////////////////////////////
