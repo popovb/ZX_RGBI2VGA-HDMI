@@ -4,6 +4,10 @@
 
 #include "CaptureSettings.hpp"
 
+#if !PICO_NO_HARDWARE
+#include "hardware/pio.h"
+#endif
+
 #ifndef _ZXRGB_CAPTURER_HPP_
 #define _ZXRGB_CAPTURER_HPP_
 
@@ -25,6 +29,10 @@ namespace zxrgb {
 	  void dma_init() const;
 	  void test_pin_init() const;
 	  void captured_pin_init() const;
+
+     private:
+	  template<class P>
+	  int add_program(const P&, pio_sm_config&) const;
      };
 }
 #endif // _ZXRGB_CAPTURER_HPP_
