@@ -23,6 +23,8 @@ namespace zxrgb {
 	  void pin_init() const;
 	  void sm_init() const;
 	  void dma_init() const;
+	  void test_pin_init() const;
+	  void captured_pin_init() const;
      };
 }
 #endif // _ZXRGB_CAPTURER_HPP_

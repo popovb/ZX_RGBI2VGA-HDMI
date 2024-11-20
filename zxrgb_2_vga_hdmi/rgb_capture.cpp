@@ -30,7 +30,7 @@
 using namespace zxrgb;
 
 static u16 F_CAP_PIN  = CapturedPins::f;
-static u16 D0_CAP_PIN = CapturedPins::b;
+//static u16 D0_CAP_PIN = CapturedPins::b;
 static u16 HS_PIN     = CapturedPins::s_syn;
 
 //#define MIN(x,y) ((x)<(y)?(x):(y))
@@ -190,22 +190,23 @@ void __not_in_flash_func(dma_handler_capture())
 }
 /*
 void startCapture(CaptureSettings* cap_data) {   
-     // memcpy(&cap_set,cap_data,sizeof(cap_set_t));
-     set_cap_data(cap_data);
-     //check_cap_data(&cap_set);
+     // // memcpy(&cap_set,cap_data,sizeof(cap_set_t));
+     // set_cap_data(cap_data);
+     // //check_cap_data(&cap_set);
 
-     for(int i=0;i<256;i++) {
-	  uint8_t ch=i>>4;
-	  uint8_t cl=i&0xf;
-	  convertArr[i]=(ch<<4)|cl;
-     }
+     // for(int i=0;i<256;i++) {
+     // 	  uint8_t ch=i>>4;
+     // 	  uint8_t cl=i&0xf;
+     // 	  convertArr[i]=(ch<<4)|cl;
+     // }
 
+     ----------------------
      gpio_init(TST_PIN);
      gpio_set_dir(TST_PIN,GPIO_OUT);
     
      gpio_init(F_CAP_PIN);
      gpio_set_dir(F_CAP_PIN,GPIO_IN); 
-     int sm=SM_CAP;
+
      uint pin=D0_CAP_PIN;
      //инверсия входных сигналов
      int inv_mask = cap_set.inv_pin_mask;
@@ -217,7 +218,12 @@ void startCapture(CaptureSettings* cap_data) {
 	  if (inv_mask&1) gpio_set_inover(pin+i,GPIO_OVERRIDE_INVERT);
 	  inv_mask>>=1;
      }
-    
+     -----------------------------------
+
+
+     int sm=SM_CAP;
+     
+     --------------------------------------------
      uint offset;
      pio_sm_config c;
      auto& pph = get_pio_prog_holder();
@@ -286,7 +292,9 @@ void startCapture(CaptureSettings* cap_data) {
 	  PIO_CAP->sm[sm].clkdiv=div32&0xffffffff;
 
      };
-       
+     ----------------------------
+
+     ----------------------------
      DMA_BUF_ADDR_CAP[0]=&DMA_BUF_CAP[0][0];
      DMA_BUF_ADDR_CAP[1]=&DMA_BUF_CAP[1][0];
 
@@ -332,6 +340,7 @@ void startCapture(CaptureSettings* cap_data) {
 
   
      dma_channel_set_irq1_enabled(dma_chan, true);
+     ---------------------------
 
      // Configure the processor to run dma_handler() when DMA IRQ 0 is asserted
      irq_set_exclusive_handler(DMA_IRQ_1, dma_handler_capture);
