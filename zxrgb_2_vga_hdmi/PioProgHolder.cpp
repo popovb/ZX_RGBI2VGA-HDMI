@@ -20,6 +20,7 @@ zxrgb::PioProgHolder::PioProgHolder():
      pio_progs{
 	  &ssp,
 	  &esp,
+	  &z80,
 	  nullptr,
      }
 {

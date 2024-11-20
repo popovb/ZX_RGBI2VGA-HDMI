@@ -6,6 +6,7 @@
 #include "PioProgType.hpp"
 #include "SelfSyncProg.hpp"
 #include "ExtSyncProg.hpp"
+#include "Z80FreqProg.hpp"
 #include "Types.hpp"
 
 #ifndef _ZXRGB_PIO_PROG_HOLDER_HPP_
@@ -28,6 +29,7 @@ namespace zxrgb {
      private:
 	  SelfSyncProg ssp;
 	  ExtSyncProg esp;
+	  Z80FreqProg z80;
      };
      ///////////////////////////////////////////////
 
