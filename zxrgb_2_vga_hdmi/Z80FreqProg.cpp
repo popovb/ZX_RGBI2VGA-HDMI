@@ -37,14 +37,7 @@ zxrgb::Z80FreqProg::Z80FreqProg() {
 void zxrgb::Z80FreqProg::set_delay_rise(u32 v) {
      cmds[1] |= ((v & 0b11111) << 8);
 }
-/*
-void zxrgb::Z80FreqProg::set_delay(u32 v) {
-     cmds[0] |= ((v & 0b11111) << 8);
-}
 
-void zxrgb::Z80FreqProg::set_ext_freq_div(u32 v) {
-     u32 vv = (v - 1) & 0b11111;
-     cmds[1] |= vv;
-     cmds[8] |= vv;
+void zxrgb::Z80FreqProg::set_delay_fall(u32 v) {
+     cmds[5] |= ((v & 0b11111) << 8);
 }
-*/
