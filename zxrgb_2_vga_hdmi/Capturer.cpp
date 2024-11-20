@@ -3,6 +3,7 @@
 //
 
 #include "Capturer.hpp"
+#include "CapturedPins.hpp"
 #include <Arduino.h>
 
 ///////////////////////////////////////////////////////////////////
@@ -33,5 +34,17 @@ void zxrgb::Capturer::pin_init() const {
 void zxrgb::Capturer::test_pin_init() const {
      gpio_init(test_pin);
      gpio_set_dir(test_pin, GPIO_OUT);
+}
+
+void zxrgb::Capturer::captured_pin_init() const {
+     const u8 start_pin = CapturedPins::b;
+     for (u8 i = 0; i < 7; i++) {
+	  u8 pin = start_pin + i;
+	  gpio_init(pin);
+	  gpio_set_dir(pin, GPIO_OUT);
+	  gpio_set_input_hysteresis_enabled(pin, true);
+	  if ( (cs.inv_pin_mask >> i) & 1 )
+	       gpio_set_inover(pin, GPIO_OVERRIDE_INVERT);
+     }
 }
 ///////////////////////////////////////////////////////////////////

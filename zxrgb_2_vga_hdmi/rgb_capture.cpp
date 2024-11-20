@@ -30,7 +30,7 @@
 using namespace zxrgb;
 
 static u16 F_CAP_PIN  = CapturedPins::f;
-//static u16 D0_CAP_PIN = CapturedPins::b;
+static u16 D0_CAP_PIN = CapturedPins::b;
 static u16 HS_PIN     = CapturedPins::s_syn;
 
 //#define MIN(x,y) ((x)<(y)?(x):(y))
@@ -201,25 +201,24 @@ void startCapture(CaptureSettings* cap_data) {
      // }
 
      ----------------------
-     gpio_init(TST_PIN);
-     gpio_set_dir(TST_PIN,GPIO_OUT);
+     // // gpio_init(TST_PIN);
+     // // gpio_set_dir(TST_PIN,GPIO_OUT);
     
-     gpio_init(F_CAP_PIN);
-     gpio_set_dir(F_CAP_PIN,GPIO_IN); 
+     // // gpio_init(F_CAP_PIN);
+     // // gpio_set_dir(F_CAP_PIN,GPIO_IN); 
 
-     uint pin=D0_CAP_PIN;
-     //инверсия входных сигналов
-     int inv_mask = cap_set.inv_pin_mask;
-     for(int i=0;i<7;i++)
-     {
-	  gpio_init(pin+i);
-	  gpio_set_dir(pin+i,GPIO_IN);  
-	  gpio_set_input_hysteresis_enabled(pin+i,true);
-	  if (inv_mask&1) gpio_set_inover(pin+i,GPIO_OVERRIDE_INVERT);
-	  inv_mask>>=1;
-     }
+     // uint pin=D0_CAP_PIN;
+     // //инверсия входных сигналов
+     // int inv_mask = cap_set.inv_pin_mask;
+     // for(int i=0;i<7;i++)
+     // {
+     // 	  gpio_init(pin+i);
+     // 	  gpio_set_dir(pin+i,GPIO_IN);  
+     // 	  gpio_set_input_hysteresis_enabled(pin+i,true);
+     //   if (inv_mask&1) gpio_set_inover(pin+i,GPIO_OVERRIDE_INVERT);
+     // 	  inv_mask>>=1;
+     // }
      -----------------------------------
-
 
      int sm=SM_CAP;
      
