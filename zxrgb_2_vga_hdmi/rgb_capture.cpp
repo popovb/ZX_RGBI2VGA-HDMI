@@ -37,38 +37,6 @@ static u16 HS_PIN     = CapturedPins::s_syn;
 //массив палитры
 uint8_t convertArr[256];
 
-zxrgb::CaptureSettings cap_set_MAX = {
-     .shift_x = 200,
-     .shift_y = 200,
-     .clk_mode = ClockMode::Z80Freq,
-     .video_mode = VideoMode::Comp,
-     .sync_mode = SyncMode::C,
-     .int_freq = 11000000,
-     .ext_freq_div = 5,
-     .delay = 31,
-     .delay_rise = 31,
-     .delay_fall = 31,
-     .inv_pin_mask = 0x7f,
-     .len_vs = 500,
-     .color_mode = ColorMode::Secam
-};
-
-zxrgb::CaptureSettings cap_set_MIN = {
-     .shift_x = 0,
-     .shift_y = 0,
-     .clk_mode = ClockMode::SelfSync,
-     .video_mode = VideoMode::Vga,
-     .sync_mode = SyncMode::S,
-     .int_freq = 6000000,
-     .ext_freq_div = 1,
-     .delay = 0,
-     .delay_rise = 0,
-     .delay_fall = 0,
-     .inv_pin_mask = 0,
-     .len_vs = 50,
-     .color_mode = ColorMode::Pal
-};
-
 zxrgb::CaptureSettings cap_set = {
      .shift_x = 40,
      .shift_y = 40,
@@ -314,16 +282,6 @@ void startCapture(CaptureSettings* cap_data) {
      default:
 	  break;
      }
-
-   
-
-    
-     
-    
-     //sm_config_set_wrap(&c, offset + 3, offset + 6);
-
-   
-   
 
      sm_config_set_fifo_join(&c, PIO_FIFO_JOIN_RX);
     
