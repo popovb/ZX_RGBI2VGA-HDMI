@@ -13,7 +13,8 @@ static const zxrgb::u8 test_pin = 25;
 
 ///////////////////////////////////////////////////////////////////
 zxrgb::Capturer::Capturer(const CaptureSettings& v):
-     cs(v)
+     cs(v),
+     pio(pio1)
 {
      return;
 }
@@ -63,15 +64,6 @@ void zxrgb::Capturer::sm_init() const {
 	  auto& pp = (*(SelfSyncProg*)s);
 	  pp.set_delay(cs.delay);
 	  offset = add_program(pp, sm_conf);
-	  /*
-	  ///
-	  offset = pio_add_program(PIO_CAP, pp.get_pio_program());
-	  sm_conf = pio_get_default_sm_config();
-	  sm_config_set_wrap(&sm_conf,
-			     offset,
-			     offset + (pp.get_pio_program()->length - 1));
-	  ///
-	  */
 	  break;
      }
 
@@ -83,15 +75,6 @@ void zxrgb::Capturer::sm_init() const {
 	  pp.set_delay(cs.delay);
 	  pp.set_ext_freq_div(cs.ext_freq_div);
 	  offset = add_program(pp, sm_conf);
-	  /*
-	  ///
-	  offset = pio_add_program(PIO_CAP, pp.get_pio_program());
-	  sm_conf = pio_get_default_sm_config();
-	  sm_config_set_wrap(&sm_conf,
-			     offset,
-			     offset + (pp.get_pio_program()->length - 1));
-	  ///
-	  */
 	  break;
      }
 
@@ -103,15 +86,6 @@ void zxrgb::Capturer::sm_init() const {
 	  pp.set_delay_rise(cs.delay_rise);
 	  pp.set_delay_fall(cs.delay_fall);
 	  offset = add_program(pp, sm_conf);
-	  /*
-	  ///
-	  offset = pio_add_program(PIO_CAP, pp.get_pio_program());
-	  sm_conf = pio_get_default_sm_config();
-	  sm_config_set_wrap(&sm_conf,
-			     offset,
-			     offset + (pp.get_pio_program()->length - 1));
-	  ///
-	  */
 	  break;
      }
 
@@ -123,5 +97,15 @@ void zxrgb::Capturer::sm_init() const {
      //
      // TODO
      //
+}
+
+int zxrgb::Capturer::add_program(const PioProg& pp,
+				 pio_sm_config& sm_conf) const {
+     int offset = pio_add_program(pio, pp.get_pio_program());
+     sm_conf = pio_get_default_sm_config();
+     sm_config_set_wrap(&sm_conf,
+			offset,
+			offset + (pp.get_pio_program()->length - 1));
+     return offset;
 }
 ///////////////////////////////////////////////////////////////////
