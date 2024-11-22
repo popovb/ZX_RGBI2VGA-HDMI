@@ -53,7 +53,6 @@ void zxrgb::Capturer::captured_pin_init() const {
 void zxrgb::Capturer::sm_init() const {
      int offset;
      pio_sm_config sm_conf;
-     auto& pph = get_pio_prog_holder();
 
      switch (cs.clk_mode) {
 
@@ -62,14 +61,6 @@ void zxrgb::Capturer::sm_init() const {
 	  break;
 
      case ClockMode::ExtSync:
-	  /*
-	  auto* s = pph.get(PioProgType::ExtSync);
-	  if (s == nullptr) break;
-	  auto& pp = (*(ExtSyncProg*)s);
-	  pp.set_delay(cs.delay);
-	  pp.set_ext_freq_div(cs.ext_freq_div);
-	  offset = add_program(pp, sm_conf);
-	  */
 	  offset = add_extsync_prog(sm_conf);
 	  break;
 
@@ -108,9 +99,19 @@ int zxrgb::Capturer::add_program(const PioProg& pp,
 int zxrgb::Capturer::add_selfsync_prog(pio_sm_config& sm_conf) const {
      auto& pph = get_pio_prog_holder();
      auto* s = pph.get(PioProgType::SelfSync);
-     if (s == nullptr) -1;
+     if (s == nullptr) return -1;
      auto& pp = (*(SelfSyncProg*)s);
      pp.set_delay(cs.delay);
+     return add_program(pp, sm_conf);
+}
+
+int zxrgb::Capturer::add_extsync_prog(pio_sm_config& sm_conf) const {
+     auto& pph = get_pio_prog_holder();
+     auto* s = pph.get(PioProgType::ExtSync);
+     if (s == nullptr) return -1;
+     auto& pp = (*(ExtSyncProg*)s);
+     pp.set_delay(cs.delay);
+     pp.set_ext_freq_div(cs.ext_freq_div);
      return add_program(pp, sm_conf);
 }
 ///////////////////////////////////////////////////////////////////
