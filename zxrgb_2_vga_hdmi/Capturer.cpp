@@ -14,7 +14,10 @@ static const zxrgb::u8 test_pin = 25;
 ///////////////////////////////////////////////////////////////////
 zxrgb::Capturer::Capturer(const CaptureSettings& v):
      cs(v),
-     pio(pio1)
+     pio(pio1),
+     start_pin(CapturedPins::b),
+     hs_pin(CapturedPins::s_syn),
+     sm(0)
 {
      return;
 }
@@ -39,7 +42,6 @@ void zxrgb::Capturer::test_pin_init() const {
 }
 
 void zxrgb::Capturer::captured_pin_init() const {
-     const u8 start_pin = CapturedPins::b;
      for (u8 i = 0; i < 7; i++) {
 	  u8 pin = start_pin + i;
 	  gpio_init(pin);
@@ -72,10 +74,19 @@ void zxrgb::Capturer::sm_init() const {
 	  break;
      }
 
+     sm_config_set_fifo_join(&sm_conf, PIO_FIFO_JOIN_RX);
+     sm_config_set_in_shift(&sm_conf, false, false, 8);
+     sm_config_set_in_pins(&sm_conf, start_pin);
+     sm_config_set_jmp_pin(&sm_conf, hs_pin);
+     pio_sm_init(pio, sm, offset, &sm_conf);
+     pio_sm_set_enabled(pio, sm, true);
 
-     //
-     // TODO
-     //
+     if (cs.clk_mode == ClockMode::SelfSync) {
+	  u32 div = (u32)( ( 1.0 * clock_get_hz(clk_sys) /
+			     (cs.int_freq * 12.0) )
+			   * (1 << 16) + 0.5 );
+	  pio->sm[sm].clkdiv = div & 0xFFFFFFFF;
+     };
 }
 
 int zxrgb::Capturer::add_program(const PioProg& pp,

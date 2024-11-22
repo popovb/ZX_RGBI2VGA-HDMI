@@ -23,7 +23,10 @@ namespace zxrgb {
 
      private:
 	  const CaptureSettings& cs;
-	  PIO pio;
+	  const PIO pio;
+	  const u8 start_pin;
+	  const u8 hs_pin;
+	  const u8 sm;
 
      private:
 	  void pin_init() const;

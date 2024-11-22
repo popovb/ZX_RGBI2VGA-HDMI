@@ -220,77 +220,30 @@ void startCapture(CaptureSettings* cap_data) {
      // }
      -----------------------------------
 
-     int sm=SM_CAP;
+     // int sm=SM_CAP;
      
      --------------------------------------------
-     uint offset;
-     pio_sm_config c;
-     auto& pph = get_pio_prog_holder();
-     switch (cap_set.clk_mode) {
+     // uint offset;
+     // pio_sm_config c;
+     // auto& pph = get_pio_prog_holder();
 
-     case ClockMode::SelfSync:
-     {
-	  auto* s = pph.get(PioProgType::SelfSync);
-	  if (s == nullptr) break;
-	  auto& pp = (*(SelfSyncProg*)s);
-	  pp.set_delay(cap_set.delay);
-	  offset = pio_add_program(PIO_CAP, pp.get_pio_program());
-	  c = pio_get_default_sm_config();
-	  sm_config_set_wrap(&c,
-			     offset,
-			     offset + (pp.get_pio_program()->length - 1));
-	  break;
-     }
+     // CUT
 
-     case ClockMode::ExtSync:
-     {
-	  auto* s = pph.get(PioProgType::ExtSync);
-	  if (s == nullptr) break;
-	  auto& pp = (*(ExtSyncProg*)s);
-	  pp.set_delay(cap_set.delay);
-	  pp.set_ext_freq_div(cap_set.ext_freq_div);
-	  offset = pio_add_program(PIO_CAP, pp.get_pio_program());
-	  c = pio_get_default_sm_config();
-	  sm_config_set_wrap(&c,
-			     offset,
-			     offset + (pp.get_pio_program()->length - 1));
-	  break;
-     }
-
-     case ClockMode::Z80Freq:
-     {
-	  auto* s = pph.get(PioProgType::Z80Freq);
-	  if (s == nullptr) break;
-	  auto& pp = (*(Z80FreqProg*)s);
-	  pp.set_delay_rise(cap_set.delay_rise);
-	  pp.set_delay_fall(cap_set.delay_fall);
-	  offset = pio_add_program(PIO_CAP, pp.get_pio_program());
-	  c = pio_get_default_sm_config();
-	  sm_config_set_wrap(&c,
-			     offset,
-			     offset + (pp.get_pio_program()->length - 1));
-	  break;
-     }
-
-     default:
-	  break;
-     }
-
-     sm_config_set_fifo_join(&c, PIO_FIFO_JOIN_RX);
+     // sm_config_set_fifo_join(&c, PIO_FIFO_JOIN_RX);
     
-     sm_config_set_in_shift(&c, false, false, 8);//автопуш  не надо 
-     sm_config_set_in_pins(&c, pin);
-     sm_config_set_jmp_pin(&c,HS_PIN);
+     // sm_config_set_in_shift(&c, false, false, 8);//автопуш  не надо 
+     // sm_config_set_in_pins(&c, pin);
+     // sm_config_set_jmp_pin(&c,HS_PIN);
 
-     pio_sm_init(PIO_CAP, sm, offset, &c);
-     pio_sm_set_enabled(PIO_CAP, sm, true);
+     // pio_sm_init(PIO_CAP, sm, offset, &c);
+     // pio_sm_set_enabled(PIO_CAP, sm, true);
 
-     if (cap_set.clk_mode == ClockMode::SelfSync) {
-	  float fdiv=((1.0*clock_get_hz(clk_sys)/(cap_set.int_freq*12.0)) * (1 << 16)+0.5);
-	  uint32_t div32=(uint32_t) (fdiv);
-	  PIO_CAP->sm[sm].clkdiv=div32&0xffffffff;
+     // if (cap_set.clk_mode == ClockMode::SelfSync) {
+     // 	  float fdiv=((1.0*clock_get_hz(clk_sys)/(cap_set.int_freq*12.0)) * (1 << 16)+0.5);
+     // 	  uint32_t div32=(uint32_t) (fdiv);
+     // 	  PIO_CAP->sm[sm].clkdiv=div32&0xffffffff;
 
-     };
+     // };
      ----------------------------
 
      ----------------------------
