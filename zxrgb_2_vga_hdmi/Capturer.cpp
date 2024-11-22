@@ -62,26 +62,28 @@ void zxrgb::Capturer::sm_init() const {
 	  break;
 
      case ClockMode::ExtSync:
-     {
+	  /*
 	  auto* s = pph.get(PioProgType::ExtSync);
 	  if (s == nullptr) break;
 	  auto& pp = (*(ExtSyncProg*)s);
 	  pp.set_delay(cs.delay);
 	  pp.set_ext_freq_div(cs.ext_freq_div);
 	  offset = add_program(pp, sm_conf);
+	  */
+	  offset = add_extsync_prog(sm_conf);
 	  break;
-     }
 
      case ClockMode::Z80Freq:
-     {
+	  /*
 	  auto* s = pph.get(PioProgType::Z80Freq);
 	  if (s == nullptr) break;
 	  auto& pp = (*(Z80FreqProg*)s);
 	  pp.set_delay_rise(cs.delay_rise);
 	  pp.set_delay_fall(cs.delay_fall);
 	  offset = add_program(pp, sm_conf);
+	  */
+	  offset = add_z80freq_prog(sm_conf);
 	  break;
-     }
 
      default:
 	  break;
