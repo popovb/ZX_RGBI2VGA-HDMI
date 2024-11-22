@@ -32,6 +32,7 @@ namespace zxrgb {
 	  void test_pin_init() const;
 	  void captured_pin_init() const;
 	  int add_program(const PioProg&, pio_sm_config&) const;
+	  int add_selfsync_prog(pio_sm_config&) const;
      };
 }
 #endif // _ZXRGB_CAPTURER_HPP_

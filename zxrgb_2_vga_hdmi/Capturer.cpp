@@ -58,14 +58,8 @@ void zxrgb::Capturer::sm_init() const {
      switch (cs.clk_mode) {
 
      case ClockMode::SelfSync:
-     {
-	  auto* s = pph.get(PioProgType::SelfSync);
-	  if (s == nullptr) break;
-	  auto& pp = (*(SelfSyncProg*)s);
-	  pp.set_delay(cs.delay);
-	  offset = add_program(pp, sm_conf);
+	  offset = add_selfsync_prog(sm_conf);
 	  break;
-     }
 
      case ClockMode::ExtSync:
      {
@@ -107,5 +101,14 @@ int zxrgb::Capturer::add_program(const PioProg& pp,
 			offset,
 			offset + (pp.get_pio_program()->length - 1));
      return offset;
+}
+
+int zxrgb::Capturer::add_selfsync_prog(pio_sm_config& sm_conf) const {
+     auto& pph = get_pio_prog_holder();
+     auto* s = pph.get(PioProgType::SelfSync);
+     if (s == nullptr) -1;
+     auto& pp = (*(SelfSyncProg*)s);
+     pp.set_delay(cs.delay);
+     return add_program(pp, sm_conf);
 }
 ///////////////////////////////////////////////////////////////////
